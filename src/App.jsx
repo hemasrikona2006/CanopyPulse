@@ -4,7 +4,8 @@ import {
   Filter, Download, AlertTriangle, CheckCircle, Flame, Leaf, Globe, Users, 
   Trash2, ExternalLink, ArrowRight, Activity, ChevronRight, Info, Check, 
   X, Sparkles, Building2, Smartphone, TrendingUp, AlertCircle, Eye,
-  Clock, CheckCircle2, XCircle, PlusCircle, Calendar, User, Tag
+  Clock, CheckCircle2, XCircle, PlusCircle, Calendar, User, Tag,
+  Sun, Thermometer, Compass, Sliders, Radio, Maximize2, Droplets, Wind, BarChart3, Zap
 } from 'lucide-react';
 
 // --- BILINGUAL UI DICTIONARY (ENGLISH / TELUGU) ---
@@ -20,9 +21,74 @@ const TRANSLATIONS = {
     navDashboard: "CSR Dashboard",
     navAbout: "About & Impact",
     
-    // Map Screen
+    // Member 1: Satellite Thermal GIS Mapping & Urban Heat Island Analytics
+    member1Badge: "Member 1: Satellite Thermal GIS Mapping & Urban Heat Island Analytics",
     mapTitle: "Visakhapatnam Thermal GIS Overlay",
-    mapSub: "Live Land Surface Temperature (LST) & Canopy Density across Vizag Wards",
+    mapSub: "Multi-band Landsat-9 TIRS & Sentinel-2 MSI remote sensing telemetry across Visakhapatnam Wards",
+    
+    // Member 1 GIS Sub-Tabs
+    subtabGisMap: "Interactive Satellite GIS Map",
+    subtabTelemetry: "Ward Micro-Climate Telemetry",
+    subtabSimulator: "What-If Afforestation Cooling Simulator",
+    subtabThermalRanking: "Ward Thermal Index & Heat Ranking",
+    
+    // Satellite Bands & Remote Sensing Layers
+    layerThermal: "Landsat-9 Thermal LST (Band 10)",
+    layerThermalDesc: "Land Surface Temperature heat gradients (30°C - 42°C+)",
+    layerNdvi: "Sentinel-2 NDVI Vegetation Density",
+    layerNdviDesc: "Normalized Difference Vegetation Index (0.0 - 0.6)",
+    layerHotspots: "UHI Micro-Climate Risk Corridors",
+    layerHotspotsDesc: "Identified heat trap zones & industrial exhaust buffers",
+    layerSatellite: "True-Color High-Res Basemap",
+    layerSatelliteDesc: "High-contrast coastal terrain & topography",
+    
+    // Temporal Overpass
+    timeMorning: "10:30 AM (Landsat Overpass)",
+    timeAfternoon: "02:00 PM (Peak Solar UHI)",
+    timeEvening: "08:30 PM (Concrete Radiative Trap)",
+    temporalSelector: "Temporal Satellite Overpass",
+    
+    // Telemetry Metrics
+    heatAnomaly: "Heat Anomaly (vs Vizag Coastal Avg 31.5°C)",
+    imperviousSurface: "Impervious Concrete Ratio",
+    surfaceAlbedo: "Thermal Reflection (Albedo)",
+    ndviIndex: "NDVI Index",
+    uhiSeverity: "UHI Severity Rating",
+    canopyDeficit: "Canopy Deficit (vs 25% National Goal)",
+    recommendedNativeSpecies: "Recommended Native Species for this Micro-Climate",
+    microClimateDesc: "Micro-Climate Classification",
+    soilClassification: "Soil & Geo-Terrain Class",
+    stressFactors: "Thermal Stress Factors",
+    
+    // Cooling Simulator
+    simTitle: "Interactive Afforestation Cooling Simulation Engine",
+    simSub: "Model the micro-climate cooling impact of targeted sapling planting drives on Land Surface Temperature",
+    simSaplingSlider: "Saplings to Plant in this Ward",
+    simTargetSpecies: "Target Species Mix",
+    simCoolingResult: "Projected LST Cooling Effect",
+    simCanopyResult: "Projected Canopy Density Gain",
+    simCarbonResult: "Annual CO2 Sequestration",
+    simMoistureResult: "Soil Moisture Retention",
+    simApplyBtn: "Apply Simulation to CSR Target Plan",
+    simAppliedMsg: "Simulation scenario successfully committed to CSR targets!",
+    simResetBtn: "Reset Simulation",
+    
+    // Thermal Filter & Sorting
+    filterAllWards: "All 10 Wards",
+    filterCriticalHeat: "Critical (>38°C)",
+    filterSevereHeat: "High (36-38°C)",
+    filterModerateHeat: "Moderate (34-36°C)",
+    filterCoolBuffer: "Cool Buffer (<34°C)",
+    sortByHottest: "Hottest to Coolest",
+    sortByCoolest: "Coolest to Hottest",
+    sortByLowestCanopy: "Lowest Canopy First",
+    sortByHighestSaplings: "Most Saplings Tagged",
+    
+    // Actions & Tooltips
+    inspectWardBtn: "Deep-Dive Ward Telemetry",
+    zoomToWard: "Focus on Ward",
+    simulateForWard: "Simulate Afforestation",
+    registerAuditForWard: "Register / Audit Sapling for this Ward",
     lstLegend: "Surface Temp (°C)",
     highPriority: "High Priority",
     criticalPriority: "Critical Priority",
@@ -164,9 +230,74 @@ const TRANSLATIONS = {
     navDashboard: "CSR డాష్‌బోర్డ్",
     navAbout: "మా గురించి & ప్రభావం",
     
-    // Map Screen
+    // Member 1: Satellite Thermal GIS Mapping & Urban Heat Island Analytics (Telugu)
+    member1Badge: "సభ్యుడు 1: ఉపగ్రహ థర్మల్ GIS మ్యాపింగ్ & అర్బన్ హీట్ అనలిటిక్స్",
     mapTitle: "విశాఖపట్నం థర్మల్ GIS మ్యాప్",
-    mapSub: "విశాఖ వార్డులలో ప్రత్యక్ష భూ ఉపరితల ఉష్ణోగ్రత (LST) మరియు ఆకుపచ్చ సాంద్రత",
+    mapSub: "విశాఖపట్నం వార్డులలో Landsat-9 TIRS & Sentinel-2 MSI ఉపగ్రహ ఉష్ణోగ్రత మరియు పచ్చదనం విశ్లేషణ",
+    
+    // Member 1 GIS Sub-Tabs
+    subtabGisMap: "ఉపగ్రహ GIS మ్యాప్",
+    subtabTelemetry: "వార్డు మైక్రో-క్లైమేట్ వివరాలు",
+    subtabSimulator: "వృక్షారోపణ ఉష్ణోగ్రత తగ్గింపు సిమ్యులేటర్",
+    subtabThermalRanking: "వార్డు ఉష్ణ సూచిక & ర్యాంకింగ్",
+    
+    // Satellite Bands & Remote Sensing Layers
+    layerThermal: "Landsat-9 థర్మల్ LST (బ్యాండ్ 10)",
+    layerThermalDesc: "భూ ఉపరితల ఉష్ణోగ్రత (30°C - 42°C+)",
+    layerNdvi: "Sentinel-2 NDVI పచ్చదనం సాంద్రత",
+    layerNdviDesc: "వృక్ష సాంద్రత సూచిక (0.0 - 0.6)",
+    layerHotspots: "అర్బన్ హీట్ ఐలాండ్ హాట్‌స్పాట్లు",
+    layerHotspotsDesc: "పారిశ్రామిక వేడి మరియు కాంక్రీట్ ప్రాంతాలు",
+    layerSatellite: "ఉపగ్రహ బేస్‌మ్యాప్",
+    layerSatelliteDesc: "సముద్ర తీర మరియు నగర స్థలాకృతి",
+    
+    // Temporal Overpass
+    timeMorning: "ఉదయం 10:30 (Landsat ఓవర్‌పాస్)",
+    timeAfternoon: "మధ్యాహ్నం 02:00 (గరిష్ట ఉష్ణోగ్రత)",
+    timeEvening: "రాత్రి 08:30 (కాంక్రీట్ వేడి ఉద్గారాలు)",
+    temporalSelector: "ఉపగ్రహ సమయ ఎంపిక",
+    
+    // Telemetry Metrics
+    heatAnomaly: "ఉష్ణోగ్రత వ్యత్యాసం (తీర సగటు 31.5°C తో)",
+    imperviousSurface: "కాంక్రీట్/తారు విస్తీర్ణం",
+    surfaceAlbedo: "ఉష్ణ ప్రతిబింబం (ఆల్బెడో)",
+    ndviIndex: "NDVI సూచిక",
+    uhiSeverity: "UHI తీవ్రత రేటింగ్",
+    canopyDeficit: "ఆకుపచ్చ లోటు (25% జాతీయ లక్ష్యంతో)",
+    recommendedNativeSpecies: "ఈ వాతావరణానికి సిఫార్సు చేయబడిన మొక్కలు",
+    microClimateDesc: "మైక్రో-క్లైమేట్ వర్గీకరణ",
+    soilClassification: "నేల & భౌగోళిక రకం",
+    stressFactors: "ఉష్ణోగ్రత ఒత్తిడి కారకాలు",
+    
+    // Cooling Simulator
+    simTitle: "వృక్షారోపణ ఉష్ణోగ్రత తగ్గింపు సిమ్యులేటర్",
+    simSub: "మొక్కలు నాటడం ద్వారా భూ ఉపరితల ఉష్ణోగ్రత ఎంత తగ్గుతుందో అంచనా వేయండి",
+    simSaplingSlider: "ఈ వార్డులో నాటవలసిన మొక్కల సంఖ్య",
+    simTargetSpecies: "ఎంచుకున్న మొక్కల రకాలు",
+    simCoolingResult: "అంచనా వేసిన ఉష్ణోగ్రత తగ్గింపు",
+    simCanopyResult: "పెరిగే ఆకుపచ్చ సాంద్రత",
+    simCarbonResult: "వార్షిక కార్బన్ సీక్వెస్ట్రేషన్",
+    simMoistureResult: "నేల తేమ నిలుపుదల",
+    simApplyBtn: "ఈ ప్రణాళికను CSR లక్ష్యాలకు జోడించండి",
+    simAppliedMsg: "సిమ్యులేషన్ విజయవంతంగా CSR ప్లాన్‌కు జోడించబడింది!",
+    simResetBtn: "సిమ్యులేషన్ రీసెట్ చేయండి",
+    
+    // Thermal Filter & Sorting
+    filterAllWards: "అన్ని 10 వార్డులు",
+    filterCriticalHeat: "అత్యంత వేడి (>38°C)",
+    filterSevereHeat: "ఎక్కువ వేడి (36-38°C)",
+    filterModerateHeat: "మధ్యస్థ వేడి (34-36°C)",
+    filterCoolBuffer: "చల్లని ప్రాంతం (<34°C)",
+    sortByHottest: "ఎక్కువ ఉష్ణోగ్రత నుండి తక్కువకు",
+    sortByCoolest: "తక్కువ ఉష్ణోగ్రత నుండి ఎక్కువకు",
+    sortByLowestCanopy: "తక్కువ పచ్చదనం మొదట",
+    sortByHighestSaplings: "ఎక్కువ మొక్కలు ఉన్నవి మొదట",
+    
+    // Actions & Tooltips
+    inspectWardBtn: "వార్డు పూర్తి వివరాలు",
+    zoomToWard: "వార్డును వీక్షించండి",
+    simulateForWard: "ఉష్ణోగ్రత తగ్గింపును అంచనా వేయండి",
+    registerAuditForWard: "ఈ వార్డు కోసం మొక్కను నమోదు చేయండి",
     lstLegend: "ఉపరితల ఉష్ణోగ్రత (°C)",
     highPriority: "అధిక ప్రాధాన్యత",
     criticalPriority: "అత్యంత కీలకమైనది",
@@ -299,18 +430,238 @@ const TRANSLATIONS = {
   }
 };
 
-// --- DEFAULT 10 VIZAG SAMPLE WARDS DATA ---
+// --- DEFAULT 10 VIZAG SAMPLE WARDS DATA (MEMBER 1 GIS & REMOTE SENSING TELEMETRY) ---
 const INITIAL_VIZAG_WARDS = [
-  { id: 'W65', name: 'Ward 65 Gajuwaka', lst: 38.4, canopy: 6.2, priority: 'High Priority', tagged: 450, survival: 82, sponsor: 'HPCL', lat: 17.6888, lng: 83.2012, description: 'Dense industrial auto hub with high asphalt ratio.' },
-  { id: 'W28', name: 'Ward 28 Siripuram', lst: 33.1, canopy: 18.5, priority: 'Low Priority', tagged: 120, survival: 91, sponsor: 'Local NGO', lat: 17.7210, lng: 83.3150, description: 'Commercial center with moderate shade trees.' },
-  { id: 'W58', name: 'Ward 58 Autonagar', lst: 39.2, canopy: 4.1, priority: 'High Priority', tagged: 600, survival: 74, sponsor: 'RINL Vizag Steel', lat: 17.6712, lng: 83.1850, description: 'Heavy industrial heavy vehicle corridor.' },
-  { id: 'W15', name: 'Ward 15 MVP Colony', lst: 32.5, canopy: 22.0, priority: 'Low Priority', tagged: 200, survival: 88, sponsor: 'Rotary Club', lat: 17.7420, lng: 83.3310, description: 'Residential sector with high citizen canopy.' },
-  { id: 'W42', name: 'Ward 42 Jagadamba', lst: 37.8, canopy: 5.0, priority: 'High Priority', tagged: 310, survival: 79, sponsor: 'NTPC Simhadri', lat: 17.7100, lng: 83.3000, description: 'High pedestrian market district with zero tree cover.' },
-  { id: 'W60', name: 'Ward 60 Mindi Industrial Zone', lst: 40.1, canopy: 3.2, priority: 'Critical Priority', tagged: 800, survival: 71, sponsor: 'HPCL', lat: 17.6600, lng: 83.1700, description: 'Severe heat island near petroleum refinery boundary.' },
-  { id: 'W36', name: 'Ward 36 Akkayyapalem', lst: 35.6, canopy: 11.4, priority: 'Medium Priority', tagged: 180, survival: 85, sponsor: 'Vizag Volunteers', lat: 17.7280, lng: 83.2980, description: 'Mixed residential-commercial transport route.' },
-  { id: 'W12', name: 'Ward 12 Pendurthi', lst: 34.2, canopy: 14.8, priority: 'Medium Priority', tagged: 250, survival: 89, sponsor: 'Gangavaram Port', lat: 17.7600, lng: 83.2200, description: 'Suburban transition zone experiencing rapid paving.' },
-  { id: 'W48', name: 'Ward 48 Gopalapatnam', lst: 36.1, canopy: 9.3, priority: 'High Priority', tagged: 340, survival: 78, sponsor: 'Vignan Eco Club', lat: 17.7510, lng: 83.2410, description: 'Railway junction belt with high thermal reflection.' },
-  { id: 'W04', name: 'Ward 04 Madhurawada', lst: 33.8, canopy: 16.2, priority: 'Low Priority', tagged: 290, survival: 93, sponsor: 'GITAM Eco Club', lat: 17.8180, lng: 83.3420, description: 'IT Hill corridor with ongoing sapling plantation drives.' }
+  {
+    id: 'W65',
+    name: 'Ward 65 Gajuwaka',
+    lst: 38.4,
+    canopy: 6.2,
+    priority: 'High Priority',
+    tagged: 450,
+    survival: 82,
+    sponsor: 'HPCL',
+    lat: 17.6888,
+    lng: 83.2012,
+    description: 'Dense industrial auto hub and commercial transit junction with high asphalt and vehicular emissions.',
+    ndvi: 0.12,
+    imperviousRatio: 84,
+    albedo: 0.14,
+    uhiClassification: 'High Asphalt Industrial Basin',
+    severityLevel: 'High',
+    heatAnomaly: '+6.9°C',
+    recommendedSpecies: 'Pongamia pinnata (Pungam) & Azadirachta indica (Neem)',
+    soilType: 'Red sandy loam with coastal salinity',
+    simulatedCooling: 0,
+    simulatedSaplings: 0
+  },
+  {
+    id: 'W28',
+    name: 'Ward 28 Siripuram',
+    lst: 33.1,
+    canopy: 18.5,
+    priority: 'Low Priority',
+    tagged: 120,
+    survival: 91,
+    sponsor: 'Local NGO',
+    lat: 17.7210,
+    lng: 83.3150,
+    description: 'Established civic and educational district with mature avenue shade trees and coastal breeze ventilation.',
+    ndvi: 0.38,
+    imperviousRatio: 62,
+    albedo: 0.22,
+    uhiClassification: 'Low-Moderate Urban Canopy Buffer',
+    severityLevel: 'Low',
+    heatAnomaly: '+1.6°C',
+    recommendedSpecies: 'Terminalia catappa (Badam) & Ficus benghalensis',
+    soilType: 'Coastal alluvial soil with high permeability',
+    simulatedCooling: 0,
+    simulatedSaplings: 0
+  },
+  {
+    id: 'W58',
+    name: 'Ward 58 Autonagar',
+    lst: 39.2,
+    canopy: 4.1,
+    priority: 'High Priority',
+    tagged: 600,
+    survival: 74,
+    sponsor: 'RINL Vizag Steel',
+    lat: 17.6712,
+    lng: 83.1850,
+    description: 'Heavy industrial heavy-vehicle corridor with intense thermal storage in workshops and unshaded logistics yards.',
+    ndvi: 0.08,
+    imperviousRatio: 89,
+    albedo: 0.12,
+    uhiClassification: 'High Heavy-Vehicle Thermal Corridor',
+    severityLevel: 'High',
+    heatAnomaly: '+7.7°C',
+    recommendedSpecies: 'Pongamia pinnata (Pungam) & Casuarina equisetifolia',
+    soilType: 'Compacted gravelly industrial subgrade',
+    simulatedCooling: 0,
+    simulatedSaplings: 0
+  },
+  {
+    id: 'W15',
+    name: 'Ward 15 MVP Colony',
+    lst: 32.5,
+    canopy: 22.0,
+    priority: 'Low Priority',
+    tagged: 200,
+    survival: 88,
+    sponsor: 'Rotary Club',
+    lat: 17.7420,
+    lng: 83.3310,
+    description: 'Planned residential sector with high citizen garden canopy, park corridors, and direct sea-breeze airflow.',
+    ndvi: 0.44,
+    imperviousRatio: 51,
+    albedo: 0.25,
+    uhiClassification: 'Low-Risk Coastal Canopy Haven',
+    severityLevel: 'Low',
+    heatAnomaly: '+1.0°C',
+    recommendedSpecies: 'Azadirachta indica (Neem) & Fruit/Flowering Native Trees',
+    soilType: 'Sandy clay loam with good organic matter',
+    simulatedCooling: 0,
+    simulatedSaplings: 0
+  },
+  {
+    id: 'W42',
+    name: 'Ward 42 Jagadamba',
+    lst: 37.8,
+    canopy: 5.0,
+    priority: 'High Priority',
+    tagged: 310,
+    survival: 79,
+    sponsor: 'NTPC Simhadri',
+    lat: 17.7100,
+    lng: 83.3000,
+    description: 'Ultra-dense pedestrian and retail market core with continuous concrete building facades and zero tree cover.',
+    ndvi: 0.09,
+    imperviousRatio: 92,
+    albedo: 0.13,
+    uhiClassification: 'Extreme Commercial Pedestrian Heat Basin',
+    severityLevel: 'High',
+    heatAnomaly: '+6.3°C',
+    recommendedSpecies: 'Terminalia catappa (Badam) & Dense Pocket Plantations',
+    soilType: 'Paved urban substrata with narrow planting beds',
+    simulatedCooling: 0,
+    simulatedSaplings: 0
+  },
+  {
+    id: 'W60',
+    name: 'Ward 60 Mindi Industrial Zone',
+    lst: 40.1,
+    canopy: 3.2,
+    priority: 'Critical Priority',
+    tagged: 800,
+    survival: 71,
+    sponsor: 'HPCL',
+    lat: 17.6600,
+    lng: 83.1700,
+    description: 'Severe heat island hotspot adjacent to petroleum refinery and industrial flare boundary; lowest vegetative cover.',
+    ndvi: 0.06,
+    imperviousRatio: 94,
+    albedo: 0.10,
+    uhiClassification: 'Critical Industrial Heat Sink (Refinery Belt)',
+    severityLevel: 'Critical',
+    heatAnomaly: '+8.6°C',
+    recommendedSpecies: 'Casuarina equisetifolia & Pongamia pinnata (Gas/Particulate Resilient)',
+    soilType: 'Degraded industrial coastal saline soil',
+    simulatedCooling: 0,
+    simulatedSaplings: 0
+  },
+  {
+    id: 'W36',
+    name: 'Ward 36 Akkayyapalem',
+    lst: 35.6,
+    canopy: 11.4,
+    priority: 'Medium Priority',
+    tagged: 180,
+    survival: 85,
+    sponsor: 'Vizag Volunteers',
+    lat: 17.7280,
+    lng: 83.2980,
+    description: 'Mixed residential-commercial transportation corridor with fragmented roadside canopy and rapid multi-story infill.',
+    ndvi: 0.24,
+    imperviousRatio: 72,
+    albedo: 0.18,
+    uhiClassification: 'Moderate Commercial Transit Corridor',
+    severityLevel: 'Medium',
+    heatAnomaly: '+4.1°C',
+    recommendedSpecies: 'Azadirachta indica (Neem) & Terminalia catappa',
+    soilType: 'Red loam with moderate moisture retention',
+    simulatedCooling: 0,
+    simulatedSaplings: 0
+  },
+  {
+    id: 'W12',
+    name: 'Ward 12 Pendurthi',
+    lst: 34.2,
+    canopy: 14.8,
+    priority: 'Medium Priority',
+    tagged: 250,
+    survival: 89,
+    sponsor: 'Gangavaram Port',
+    lat: 17.7600,
+    lng: 83.2200,
+    description: 'Suburban agricultural-to-urban transition zone experiencing rapid road paving and warehouse expansion.',
+    ndvi: 0.31,
+    imperviousRatio: 58,
+    albedo: 0.21,
+    uhiClassification: 'Suburban Heat Transition Belt',
+    severityLevel: 'Medium',
+    heatAnomaly: '+2.7°C',
+    recommendedSpecies: 'Ficus benghalensis (Banyan) & Azadirachta indica',
+    soilType: 'Fertile red loam transitioning to rocky pediment',
+    simulatedCooling: 0,
+    simulatedSaplings: 0
+  },
+  {
+    id: 'W48',
+    name: 'Ward 48 Gopalapatnam',
+    lst: 36.1,
+    canopy: 9.3,
+    priority: 'High Priority',
+    tagged: 340,
+    survival: 78,
+    sponsor: 'Vignan Eco Club',
+    lat: 17.7510,
+    lng: 83.2410,
+    description: 'Railway junction belt and bus transit hub with vast railway sidings and high solar thermal absorption.',
+    ndvi: 0.18,
+    imperviousRatio: 78,
+    albedo: 0.16,
+    uhiClassification: 'High Railway Junction Thermal Island',
+    severityLevel: 'High',
+    heatAnomaly: '+4.6°C',
+    recommendedSpecies: 'Pongamia pinnata (Pungam) & Casuarina equisetifolia',
+    soilType: 'Gravelly red sand along rail transit belt',
+    simulatedCooling: 0,
+    simulatedSaplings: 0
+  },
+  {
+    id: 'W04',
+    name: 'Ward 04 Madhurawada',
+    lst: 33.8,
+    canopy: 16.2,
+    priority: 'Low Priority',
+    tagged: 290,
+    survival: 93,
+    sponsor: 'GITAM Eco Club',
+    lat: 17.8180,
+    lng: 83.3420,
+    description: 'IT Hill corridor with valley breeze patterns and active campus afforestation initiatives.',
+    ndvi: 0.35,
+    imperviousRatio: 56,
+    albedo: 0.23,
+    uhiClassification: 'Moderate IT Corridor Coastal Valley',
+    severityLevel: 'Low',
+    heatAnomaly: '+2.3°C',
+    recommendedSpecies: 'Ficus benghalensis & Pongamia pinnata (Hill shade)',
+    soilType: 'Lateritic hill slope soil with good drainage',
+    simulatedCooling: 0,
+    simulatedSaplings: 0
+  }
 ];
 
 // --- MEMBER 4: INITIAL SAPLING REGISTRY BENCHMARK (VERIFIED, PENDING, FAILED) ---
@@ -476,12 +827,38 @@ const INITIAL_SAPLINGS = [
 export default function App() {
   // --- STATE MANAGEMENT ---
   const [lang, setLang] = useState('en');
-  const [activeTab, setActiveTab] = useState('geotag'); // 'map', 'geotag', 'dashboard', 'about'
+  const [activeTab, setActiveTab] = useState('map'); // Default to Member 1 GIS Heat Map
+  
+  // Member 1: Satellite Thermal GIS Mapping & Remote Sensing States
+  const [gisSubTab, setGisSubTab] = useState('map'); // 'map', 'telemetry', 'simulator', 'ranking'
+  const [activeSatelliteLayer, setActiveSatelliteLayer] = useState('thermal'); // 'thermal', 'ndvi', 'hotspots', 'satellite'
+  const [temporalOverpass, setTemporalOverpass] = useState('afternoon'); // 'morning', 'afternoon', 'evening'
+  const [thermalFilter, setThermalFilter] = useState('ALL'); // 'ALL', 'CRITICAL', 'HIGH', 'MODERATE', 'COOL'
+  const [thermalSort, setThermalSort] = useState('HOTTEST'); // 'HOTTEST', 'COOLEST', 'LOWEST_CANOPY', 'MOST_SAPLINGS'
+  const [mapSearchTerm, setMapSearchTerm] = useState('');
+  
+  // Afforestation Cooling Simulator States
+  const [simSaplingsCount, setSimSaplingsCount] = useState(1500);
+  const [simSpeciesMix, setSimSpeciesMix] = useState('balanced');
+  const [simAppliedSuccess, setSimAppliedSuccess] = useState(''); // 'map', 'geotag', 'dashboard', 'about'
   
   // Wards State
   const [wards, setWards] = useState(() => {
-    const saved = localStorage.getItem('canopypulse_wards_v2');
-    return saved ? JSON.parse(saved) : INITIAL_VIZAG_WARDS;
+    const savedV3 = localStorage.getItem('canopypulse_wards_v3');
+    if (savedV3) {
+      try { return JSON.parse(savedV3); } catch (e) {}
+    }
+    const savedV2 = localStorage.getItem('canopypulse_wards_v2');
+    if (savedV2) {
+      try {
+        const parsed = JSON.parse(savedV2);
+        return INITIAL_VIZAG_WARDS.map(initW => {
+          const matched = parsed.find(p => p.id === initW.id);
+          return matched ? { ...initW, ...matched } : initW;
+        });
+      } catch (e) {}
+    }
+    return INITIAL_VIZAG_WARDS;
   });
   const [selectedWard, setSelectedWard] = useState(INITIAL_VIZAG_WARDS[0]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -589,12 +966,97 @@ export default function App() {
   // Save to localStorage on ward state change
   // Save to localStorage
   useEffect(() => {
+    localStorage.setItem('canopypulse_wards_v3', JSON.stringify(wards));
     localStorage.setItem('canopypulse_wards_v2', JSON.stringify(wards));
   }, [wards]);
 
   useEffect(() => {
     localStorage.setItem('canopypulse_saplings_v1', JSON.stringify(saplings));
   }, [saplings]);
+
+  // --- MEMBER 1: THERMAL REMOTE SENSING & SIMULATION CALCULATIONS ---
+  const getTemporalTemp = (baseLst, time) => {
+    if (time === 'morning') return +(baseLst - 2.8).toFixed(1);
+    if (time === 'evening') return +(baseLst - 3.9).toFixed(1);
+    return baseLst; // peak afternoon baseline
+  };
+
+  // Afforestation Cooling Physics Model
+  // 5000 saplings in a dense urban corridor provides ~2.3°C LST cooling and +12.5% canopy
+  const projectedCooling = +((simSaplingsCount / 5000) * 2.3).toFixed(2);
+  const projectedCanopyGain = +((simSaplingsCount / 5000) * 12.5).toFixed(1);
+  const projectedCo2 = Math.round(simSaplingsCount * 0.022 * 10) / 10; // metric tons CO2/yr
+  const projectedMoistureGain = Math.round((simSaplingsCount / 5000) * 38);
+
+  const handleApplySimulation = () => {
+    const updated = wards.map((w) => {
+      if (w.id === selectedWard.id) {
+        return {
+          ...w,
+          simulatedCooling: projectedCooling,
+          simulatedSaplings: simSaplingsCount,
+          canopy: +(w.canopy + projectedCanopyGain).toFixed(1),
+          tagged: w.tagged + simSaplingsCount
+        };
+      }
+      return w;
+    });
+    setWards(updated);
+    setSelectedWard({
+      ...selectedWard,
+      simulatedCooling: projectedCooling,
+      simulatedSaplings: simSaplingsCount,
+      canopy: +(selectedWard.canopy + projectedCanopyGain).toFixed(1),
+      tagged: selectedWard.tagged + simSaplingsCount
+    });
+    setSimAppliedSuccess(t.simAppliedMsg);
+    setTimeout(() => setSimAppliedSuccess(''), 4500);
+  };
+
+  const handleResetSimulation = () => {
+    setSimSaplingsCount(1500);
+    setSimSpeciesMix('balanced');
+    const updated = wards.map((w) => {
+      if (w.id === selectedWard.id) {
+        return {
+          ...w,
+          simulatedCooling: 0,
+          simulatedSaplings: 0
+        };
+      }
+      return w;
+    });
+    setWards(updated);
+    setSelectedWard({
+      ...selectedWard,
+      simulatedCooling: 0,
+      simulatedSaplings: 0
+    });
+  };
+
+  // Filtered & Sorted Wards for Member 1 GIS Heat Ledger
+  const filteredMapWards = wards
+    .filter((w) => {
+      const currentTemp = getTemporalTemp(w.lst - (w.simulatedCooling || 0), temporalOverpass);
+      const matchesSearch = w.name.toLowerCase().includes(mapSearchTerm.toLowerCase()) ||
+                            w.id.toLowerCase().includes(mapSearchTerm.toLowerCase()) ||
+                            w.sponsor.toLowerCase().includes(mapSearchTerm.toLowerCase());
+      if (!matchesSearch) return false;
+      if (thermalFilter === 'CRITICAL') return currentTemp >= 38.0;
+      if (thermalFilter === 'HIGH') return currentTemp >= 36.0 && currentTemp < 38.0;
+      if (thermalFilter === 'MODERATE') return currentTemp >= 34.0 && currentTemp < 36.0;
+      if (thermalFilter === 'COOL') return currentTemp < 34.0;
+      return true;
+    })
+    .sort((a, b) => {
+      const tempA = getTemporalTemp(a.lst - (a.simulatedCooling || 0), temporalOverpass);
+      const tempB = getTemporalTemp(b.lst - (b.simulatedCooling || 0), temporalOverpass);
+      if (thermalSort === 'HOTTEST') return tempB - tempA;
+      if (thermalSort === 'COOLEST') return tempA - tempB;
+      if (thermalSort === 'LOWEST_CANOPY') return a.canopy - b.canopy;
+      if (thermalSort === 'MOST_SAPLINGS') return b.tagged - a.tagged;
+      return 0;
+    });
 
   // Sync auto-generated registration ID when ward changes
   const handleRegWardChange = (newWardId) => {
@@ -1125,227 +1587,985 @@ export default function App() {
       {/* --- MAIN APP VIEW SWITCHER --- */}
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
         
-        {/* SCREEN 1: VISAKHAPATNAM THERMAL HEAT MAP */}
+                {/* SCREEN 1: MEMBER 1 – SATELLITE THERMAL GIS MAPPING & URBAN HEAT ISLAND ANALYTICS */}
         {activeTab === 'map' && (
           <div className="space-y-6">
             
-            {/* Screen Header */}
-            <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between md:items-center gap-4">
+            {/* Header Banner with Member 1 Badge */}
+            <div className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between md:items-center gap-4">
               <div>
+                <div className="inline-flex items-center space-x-2 bg-emerald-100 text-emerald-800 text-[11px] font-bold px-3 py-1 rounded-full border border-emerald-300 mb-2">
+                  <Radio className="w-3.5 h-3.5 text-emerald-700 animate-pulse" />
+                  <span>{t.member1Badge}</span>
+                </div>
                 <h1 className="text-xl sm:text-2xl font-bold text-[#064E3B] flex items-center space-x-2">
                   <Flame className="w-6 h-6 text-rose-500" />
                   <span>{t.mapTitle}</span>
                 </h1>
-                <p className="text-sm text-slate-600 mt-1">{t.mapSub}</p>
+                <p className="text-xs sm:text-sm text-slate-600 mt-1">{t.mapSub}</p>
               </div>
 
-              {/* Map Legend Indicators */}
-              <div className="flex items-center space-x-3 text-xs bg-slate-50 p-3 rounded-xl border border-slate-200">
-                <span className="font-semibold text-slate-700">{t.lstLegend}:</span>
-                <div className="flex items-center space-x-1">
-                  <span className="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
-                  <span className="text-slate-600">&lt;34°C</span>
+              {/* Sub-Tab Navigation Strip */}
+              <div className="flex flex-wrap items-center bg-slate-100 p-1.5 rounded-xl border border-slate-200 gap-1 text-xs">
+                <button
+                  onClick={() => setGisSubTab('map')}
+                  className={`px-3 py-1.5 rounded-lg font-bold transition flex items-center space-x-1.5 ${
+                    gisSubTab === 'map' ? 'bg-[#064E3B] text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  <Compass className="w-3.5 h-3.5" />
+                  <span>{t.subtabGisMap}</span>
+                </button>
+
+                <button
+                  onClick={() => setGisSubTab('telemetry')}
+                  className={`px-3 py-1.5 rounded-lg font-bold transition flex items-center space-x-1.5 ${
+                    gisSubTab === 'telemetry' ? 'bg-[#064E3B] text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  <Activity className="w-3.5 h-3.5" />
+                  <span>{t.subtabTelemetry}</span>
+                </button>
+
+                <button
+                  onClick={() => setGisSubTab('simulator')}
+                  className={`px-3 py-1.5 rounded-lg font-bold transition flex items-center space-x-1.5 ${
+                    gisSubTab === 'simulator' ? 'bg-[#064E3B] text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  <Sliders className="w-3.5 h-3.5" />
+                  <span>{t.subtabSimulator}</span>
+                </button>
+
+                <button
+                  onClick={() => setGisSubTab('ranking')}
+                  className={`px-3 py-1.5 rounded-lg font-bold transition flex items-center space-x-1.5 ${
+                    gisSubTab === 'ranking' ? 'bg-[#064E3B] text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  <TrendingUp className="w-3.5 h-3.5" />
+                  <span>{t.subtabThermalRanking}</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Top Quick KPI Strip for Satellite Remote Sensing */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+              <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center space-x-3">
+                <div className="p-2.5 bg-rose-100 text-rose-700 rounded-xl">
+                  <Flame className="w-5 h-5 animate-pulse" />
                 </div>
-                <div className="flex items-center space-x-1">
-                  <span className="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
-                  <span className="text-slate-600">34-37°C</span>
+                <div>
+                  <span className="text-[11px] text-slate-400 block font-medium">Peak LST Recorded</span>
+                  <span className="text-xl font-black text-rose-600">40.1°C</span>
+                  <span className="text-[10px] text-slate-500 block">Ward 60 Mindi (Refinery)</span>
                 </div>
-                <div className="flex items-center space-x-1">
-                  <span className="w-3 h-3 rounded-full bg-rose-500 inline-block animate-pulse"></span>
-                  <span className="text-slate-600">&gt;38°C (Critical)</span>
+              </div>
+
+              <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center space-x-3">
+                <div className="p-2.5 bg-emerald-100 text-emerald-700 rounded-xl">
+                  <Leaf className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="text-[11px] text-slate-400 block font-medium">Avg City Canopy</span>
+                  <span className="text-xl font-black text-emerald-700">11.1%</span>
+                  <span className="text-[10px] text-rose-500 font-semibold block">-13.9% Deficit vs SLA</span>
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center space-x-3">
+                <div className="p-2.5 bg-amber-100 text-amber-700 rounded-xl">
+                  <AlertTriangle className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="text-[11px] text-slate-400 block font-medium">Severe UHI Hotspots</span>
+                  <span className="text-xl font-black text-amber-600">5 of 10 Wards</span>
+                  <span className="text-[10px] text-slate-500 block">LST &gt; 36.0°C Critical/High</span>
+                </div>
+              </div>
+
+              <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center space-x-3">
+                <div className="p-2.5 bg-sky-100 text-sky-700 rounded-xl">
+                  <Radio className="w-5 h-5 text-sky-600" />
+                </div>
+                <div>
+                  <span className="text-[11px] text-slate-400 block font-medium">Sensors Active</span>
+                  <span className="text-xl font-black text-slate-800">Landsat 9 + S2</span>
+                  <span className="text-[10px] text-emerald-600 font-semibold block">TIRS Band 10 / MSI</span>
                 </div>
               </div>
             </div>
 
-            {/* Main Interactive Map Layout Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              
-              {/* Interactive GIS Heatmap Canvas Container */}
-              <div className="lg:col-span-2 bg-slate-900 rounded-2xl border border-slate-800 shadow-lg p-4 relative overflow-hidden flex flex-col min-h-[460px]">
+            {/* SUB-TAB 1: INTERACTIVE SATELLITE GIS MAP */}
+            {gisSubTab === 'map' && (
+              <div className="space-y-6">
                 
-                {/* GIS Top Overlay Bar */}
-                <div className="flex items-center justify-between text-xs text-slate-300 z-10 bg-slate-950/80 p-2.5 rounded-lg border border-slate-800 mb-3 backdrop-blur">
-                  <div className="flex items-center space-x-2">
-                    <Layers className="w-4 h-4 text-emerald-400" />
-                    <span className="font-medium text-emerald-200">Landsat-9 / Sentinel-2 LST Thermal Overlay (Visakhapatnam)</span>
+                {/* GIS Layer Controls & Temporal Overpass Bar */}
+                <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+                  
+                  {/* Remote Sensing Layer Selector */}
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-xs font-bold text-slate-500 uppercase tracking-wider mr-1">Satellite Layer:</span>
+                    
+                    <button
+                      onClick={() => setActiveSatelliteLayer('thermal')}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 ${
+                        activeSatelliteLayer === 'thermal'
+                          ? 'bg-rose-600 text-white shadow-sm ring-2 ring-rose-300'
+                          : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                      }`}
+                    >
+                      <Flame className="w-3.5 h-3.5 text-rose-200" />
+                      <span>{t.layerThermal}</span>
+                    </button>
+
+                    <button
+                      onClick={() => setActiveSatelliteLayer('ndvi')}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 ${
+                        activeSatelliteLayer === 'ndvi'
+                          ? 'bg-emerald-700 text-white shadow-sm ring-2 ring-emerald-300'
+                          : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                      }`}
+                    >
+                      <Leaf className="w-3.5 h-3.5 text-emerald-200" />
+                      <span>{t.layerNdvi}</span>
+                    </button>
+
+                    <button
+                      onClick={() => setActiveSatelliteLayer('hotspots')}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 ${
+                        activeSatelliteLayer === 'hotspots'
+                          ? 'bg-amber-600 text-white shadow-sm ring-2 ring-amber-300'
+                          : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                      }`}
+                    >
+                      <AlertTriangle className="w-3.5 h-3.5 text-amber-200" />
+                      <span>{t.layerHotspots}</span>
+                    </button>
+
+                    <button
+                      onClick={() => setActiveSatelliteLayer('satellite')}
+                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center space-x-1.5 ${
+                        activeSatelliteLayer === 'satellite'
+                          ? 'bg-sky-700 text-white shadow-sm ring-2 ring-sky-300'
+                          : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                      }`}
+                    >
+                      <Layers className="w-3.5 h-3.5 text-sky-200" />
+                      <span>{t.layerSatellite}</span>
+                    </button>
                   </div>
-                  <span className="text-slate-400 hidden sm:inline">Coordinates: 17.6868° N, 83.2185° E</span>
+
+                  {/* Temporal Satellite Overpass Selector */}
+                  <div className="flex items-center space-x-2 text-xs w-full lg:w-auto justify-between lg:justify-end">
+                    <div className="flex items-center space-x-1 text-slate-500 font-semibold">
+                      <Sun className="w-3.5 h-3.5 text-amber-500" />
+                      <span className="hidden sm:inline">{t.temporalSelector}:</span>
+                    </div>
+                    
+                    <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs">
+                      <button
+                        onClick={() => setTemporalOverpass('morning')}
+                        className={`px-2.5 py-1 rounded-lg font-semibold transition ${
+                          temporalOverpass === 'morning' ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500 hover:text-slate-800'
+                        }`}
+                      >
+                        10:30 AM
+                      </button>
+                      <button
+                        onClick={() => setTemporalOverpass('afternoon')}
+                        className={`px-2.5 py-1 rounded-lg font-semibold transition ${
+                          temporalOverpass === 'afternoon' ? 'bg-white text-rose-700 font-bold shadow-sm' : 'text-slate-500 hover:text-slate-800'
+                        }`}
+                      >
+                        02:00 PM (Peak)
+                      </button>
+                      <button
+                        onClick={() => setTemporalOverpass('evening')}
+                        className={`px-2.5 py-1 rounded-lg font-semibold transition ${
+                          temporalOverpass === 'evening' ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500 hover:text-slate-800'
+                        }`}
+                      >
+                        08:30 PM
+                      </button>
+                    </div>
+                  </div>
+
                 </div>
 
-                {/* Simulated Visual Interactive GIS Map Area */}
-                <div className="relative flex-1 rounded-xl bg-slate-950 overflow-hidden border border-slate-800 flex items-center justify-center">
+                {/* Main Interactive Map Layout Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   
-                  {/* Visakhapatnam Coastline / Topography SVG Simulation */}
-                  <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 800 500" fill="none">
-                    <path d="M 600,0 C 550,150 650,300 750,500 L 800,500 L 800,0 Z" fill="#0284C7" opacity="0.4" />
-                    <path d="M 100,450 C 300,300 450,200 700,50" stroke="#334155" strokeWidth="6" strokeDasharray="4 4" />
-                    <path d="M 200,480 C 350,350 500,280 750,150" stroke="#1E293B" strokeWidth="4" />
-                  </svg>
+                  {/* Interactive GIS Heatmap Canvas Container */}
+                  <div className="lg:col-span-2 bg-slate-900 rounded-2xl border border-slate-800 shadow-lg p-4 relative overflow-hidden flex flex-col min-h-[500px]">
+                    
+                    {/* GIS Top Overlay Telemetry Bar */}
+                    <div className="flex flex-wrap items-center justify-between text-xs text-slate-300 z-10 bg-slate-950/80 p-2.5 rounded-lg border border-slate-800 mb-3 backdrop-blur gap-2">
+                      <div className="flex items-center space-x-2">
+                        <Radio className="w-4 h-4 text-emerald-400 animate-pulse" />
+                        <span className="font-semibold text-emerald-200">
+                          {activeSatelliteLayer === 'thermal' && "Landsat-9 TIRS Band 10 • 10.8 µm Thermal LST"}
+                          {activeSatelliteLayer === 'ndvi' && "Sentinel-2 MSI 10m • NDVI Normalized Difference Vegetation"}
+                          {activeSatelliteLayer === 'hotspots' && "Micro-Climate Urban Heat Island (UHI) Alert Vector"}
+                          {activeSatelliteLayer === 'satellite' && "True-Color RGB Surface Basemap • Visakhapatnam District"}
+                        </span>
+                      </div>
+                      
+                      <div className="flex items-center space-x-3 text-[11px] text-slate-400">
+                        <span>Coordinates: 17.6868° N, 83.2185° E</span>
+                        <span className="hidden sm:inline bg-slate-800 px-2 py-0.5 rounded text-emerald-300">
+                          Overpass: {temporalOverpass === 'morning' ? '10:30 AM' : temporalOverpass === 'afternoon' ? '02:00 PM' : '08:30 PM'}
+                        </span>
+                      </div>
+                    </div>
 
-                  {/* Thermal Heat Map Glow Waves */}
-                  <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-rose-600/20 rounded-full filter blur-3xl animate-pulse"></div>
-                  <div className="absolute top-1/3 left-1/2 w-48 h-48 bg-amber-500/20 rounded-full filter blur-2xl"></div>
-                  <div className="absolute bottom-1/4 left-1/4 w-56 h-56 bg-rose-700/25 rounded-full filter blur-3xl"></div>
+                    {/* Simulated Visual Interactive GIS Map Area */}
+                    <div className="relative flex-1 rounded-xl bg-slate-950 overflow-hidden border border-slate-800 flex items-center justify-center">
+                      
+                      {/* Visakhapatnam Coastline / Topography SVG Simulation */}
+                      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 800 500" fill="none">
+                        {/* Ocean Bay of Bengal */}
+                        <path d="M 580,0 C 530,140 640,280 740,500 L 800,500 L 800,0 Z" fill="#0369A1" opacity="0.35" />
+                        
+                        {/* Coastal Wave Buffer */}
+                        <path d="M 570,0 C 520,145 630,285 730,500" stroke="#38BDF8" strokeWidth="2" strokeDasharray="6 6" opacity="0.6" />
+                        
+                        {/* Dolphin's Nose & Kailasagiri Hill Contours */}
+                        <path d="M 540,120 Q 510,180 560,240" stroke="#1E293B" strokeWidth="16" strokeLinecap="round" opacity="0.5" />
+                        <path d="M 680,40 Q 640,90 710,140" stroke="#1E293B" strokeWidth="12" strokeLinecap="round" opacity="0.5" />
+                        
+                        {/* Major Highway NH16 & Transit Corridors */}
+                        <path d="M 80,470 C 260,330 420,220 720,40" stroke="#475569" strokeWidth="6" strokeDasharray="6 4" opacity="0.7" />
+                        <path d="M 180,490 C 320,380 480,300 760,140" stroke="#334155" strokeWidth="4" opacity="0.8" />
+                        
+                        {/* Port & Industrial Channel */}
+                        <path d="M 460,260 L 580,240 L 590,290 Z" fill="#0C4A6E" opacity="0.5" />
+                      </svg>
 
-                  {/* Ward Hotspot Markers on Canvas */}
-                  <div className="absolute inset-0 p-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 items-center justify-items-center">
-                    {wards.map((ward) => {
-                      const isHigh = ward.lst >= 38.0;
-                      const isMed = ward.lst >= 35.0 && ward.lst < 38.0;
-                      const isSelected = selectedWard.id === ward.id;
+                      {/* LAYER 1: THERMAL HEAT RADIATION OVERLAY */}
+                      {activeSatelliteLayer === 'thermal' && (
+                        <>
+                          {/* Intense Industrial Thermal Plumes */}
+                          <div className="absolute bottom-1/4 left-1/4 w-72 h-72 bg-rose-600/30 rounded-full filter blur-3xl animate-pulse"></div>
+                          <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-rose-700/25 rounded-full filter blur-2xl"></div>
+                          <div className="absolute top-1/3 left-1/2 w-52 h-52 bg-amber-500/20 rounded-full filter blur-2xl"></div>
+                          
+                          {/* Thermal Contour Lines */}
+                          <div className="absolute inset-0 border-2 border-rose-500/10 rounded-full scale-125 pointer-events-none"></div>
+                        </>
+                      )}
 
-                      return (
+                      {/* LAYER 2: SENTINEL-2 NDVI VEGETATION DENSITY OVERLAY */}
+                      {activeSatelliteLayer === 'ndvi' && (
+                        <>
+                          {/* Lush Canopy Green Belts (MVP Colony, Siripuram, Madhurawada) */}
+                          <div className="absolute top-1/6 right-1/4 w-64 h-64 bg-emerald-500/30 rounded-full filter blur-3xl"></div>
+                          <div className="absolute top-1/3 right-1/3 w-48 h-48 bg-emerald-400/25 rounded-full filter blur-2xl"></div>
+                          
+                          {/* Barren Concrete Heat Islands (Brown/Amber Deficit) */}
+                          <div className="absolute bottom-1/4 left-1/4 w-60 h-60 bg-amber-700/25 rounded-full filter blur-3xl"></div>
+                        </>
+                      )}
+
+                      {/* LAYER 3: UHI MICRO-CLIMATE RISK CORRIDORS */}
+                      {activeSatelliteLayer === 'hotspots' && (
+                        <>
+                          <div className="absolute bottom-1/4 left-1/4 w-64 h-64 border-2 border-dashed border-rose-500/50 rounded-full animate-spin" style={{ animationDuration: '25s' }}></div>
+                          <div className="absolute top-1/2 left-1/3 w-52 h-52 border border-rose-400/40 rounded-full"></div>
+                        </>
+                      )}
+
+                      {/* LAYER 4: TRUE-COLOR SATELLITE BASEMAP */}
+                      {activeSatelliteLayer === 'satellite' && (
+                        <div className="absolute inset-0 bg-gradient-to-tr from-slate-950 via-slate-900 to-sky-950/40 opacity-70 pointer-events-none"></div>
+                      )}
+
+                      {/* Ward Hotspot Markers on Canvas */}
+                      <div className="absolute inset-0 p-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 items-center justify-items-center z-20">
+                        {wards.map((ward) => {
+                          const baseTemp = ward.lst - (ward.simulatedCooling || 0);
+                          const currentTemp = getTemporalTemp(baseTemp, temporalOverpass);
+                          const isCritical = currentTemp >= 38.0;
+                          const isHigh = currentTemp >= 36.0 && currentTemp < 38.0;
+                          const isMed = currentTemp >= 34.0 && currentTemp < 36.0;
+                          const isSelected = selectedWard.id === ward.id;
+
+                          return (
+                            <button
+                              key={ward.id}
+                              onClick={() => setSelectedWard(ward)}
+                              className={`relative group transition-all duration-200 active:scale-95 p-2 rounded-xl flex flex-col items-center justify-center border shadow-lg ${
+                                isSelected 
+                                  ? 'ring-2 ring-emerald-400 ring-offset-2 ring-offset-slate-900 bg-slate-900 border-emerald-500 z-30 scale-105' 
+                                  : 'bg-slate-900/90 border-slate-700 hover:border-slate-500 hover:scale-100'
+                              }`}
+                            >
+                              {/* Temperature Hotspot Pulse Pin */}
+                              <div className="relative mb-1">
+                                <span className={`w-3.5 h-3.5 rounded-full block ${
+                                  isCritical ? 'bg-rose-500 animate-ping' : isHigh ? 'bg-rose-400' : isMed ? 'bg-amber-400' : 'bg-emerald-400'
+                                }`} />
+                                <span className={`w-3.5 h-3.5 rounded-full block absolute top-0 left-0 ${
+                                  isCritical ? 'bg-rose-500' : isHigh ? 'bg-rose-400' : isMed ? 'bg-amber-400' : 'bg-emerald-400'
+                                }`} />
+                              </div>
+
+                              <span className="text-[11px] font-bold text-slate-100 truncate max-w-[80px]">{ward.id}</span>
+                              <span className={`text-[10px] font-bold ${
+                                isCritical ? 'text-rose-400' : isHigh ? 'text-amber-400' : isMed ? 'text-yellow-400' : 'text-emerald-400'
+                              }`}>
+                                {currentTemp}°C
+                              </span>
+
+                              {/* Simulation Applied Indicator Badge */}
+                              {ward.simulatedCooling > 0 && (
+                                <span className="absolute -top-1.5 -right-1.5 bg-emerald-500 text-white text-[8px] font-extrabold px-1 rounded-full shadow">
+                                  -{ward.simulatedCooling}°
+                                </span>
+                              )}
+
+                              {/* Hover Tooltip */}
+                              <div className="absolute bottom-full mb-2 hidden group-hover:flex flex-col items-start bg-slate-950 text-white text-[10px] p-2.5 rounded-lg shadow-xl border border-slate-700 whitespace-nowrap z-40 space-y-1">
+                                <span className="font-bold text-emerald-300">{ward.name}</span>
+                                <div className="flex justify-between w-full space-x-3 text-slate-300">
+                                  <span>LST: <strong className="text-white">{currentTemp}°C</strong></span>
+                                  <span>Canopy: <strong className="text-emerald-400">{ward.canopy}%</strong></span>
+                                </div>
+                                <div className="flex justify-between w-full space-x-3 text-slate-400 text-[9px]">
+                                  <span>NDVI: {ward.ndvi}</span>
+                                  <span>Paved: {ward.imperviousRatio}%</span>
+                                </div>
+                                <span className="text-[9px] text-amber-300 italic">{ward.uhiClassification}</span>
+                              </div>
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      {/* Map Bottom Helper & Legend */}
+                      <div className="absolute bottom-3 left-3 right-3 flex flex-col sm:flex-row justify-between items-start sm:items-center bg-slate-950/85 backdrop-blur border border-slate-800 text-[11px] text-slate-300 px-3 py-2 rounded-xl gap-2 z-20">
+                        <div className="flex items-center space-x-2">
+                          <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+                          <span>Click any ward marker to inspect micro-climate metrics & simulate cooling</span>
+                        </div>
+                        
+                        <div className="flex items-center space-x-3 text-[10px]">
+                          <span className="font-semibold text-slate-400">{t.lstLegend}:</span>
+                          <span className="flex items-center space-x-1"><span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span><span>&lt;34°C</span></span>
+                          <span className="flex items-center space-x-1"><span className="w-2.5 h-2.5 rounded-full bg-amber-400"></span><span>34-36°C</span></span>
+                          <span className="flex items-center space-x-1"><span className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse"></span><span>&gt;38°C</span></span>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  {/* Selected Ward Profile Drawer Slide-Out Card */}
+                  <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col justify-between space-y-4">
+                    <div>
+                      {/* Drawer Top Priority Badge */}
+                      <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
+                        <span className="text-xs font-semibold uppercase text-slate-400 tracking-wider">Ward Micro-Climate</span>
+                        <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${
+                          selectedWard.priority === 'Critical Priority' || selectedWard.priority === 'High Priority'
+                            ? 'bg-rose-100 text-rose-700 border border-rose-200'
+                            : selectedWard.priority === 'Medium Priority'
+                            ? 'bg-amber-100 text-amber-700 border border-amber-200'
+                            : 'bg-emerald-100 text-emerald-700 border border-emerald-200'
+                        }`}>
+                          {selectedWard.priority}
+                        </span>
+                      </div>
+
+                      <h2 className="text-lg font-bold text-[#064E3B]">{selectedWard.name}</h2>
+                      <p className="text-xs text-slate-500 mt-1">{selectedWard.description}</p>
+
+                      {/* Primary Telemetry Grid */}
+                      <div className="grid grid-cols-2 gap-3 mt-4">
+                        <div className="bg-rose-50/70 border border-rose-100 p-3 rounded-xl">
+                          <div className="flex items-center space-x-1 text-rose-600 mb-1">
+                            <Flame className="w-4 h-4" />
+                            <span className="text-xs font-medium">{t.surfaceTemp}</span>
+                          </div>
+                          <div className="flex items-baseline space-x-1">
+                            <span className="text-xl font-extrabold text-rose-700">
+                              {getTemporalTemp(selectedWard.lst - (selectedWard.simulatedCooling || 0), temporalOverpass)}°C
+                            </span>
+                            {selectedWard.simulatedCooling > 0 && (
+                              <span className="text-[10px] text-emerald-600 font-bold">
+                                (-{selectedWard.simulatedCooling}°C)
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="bg-emerald-50/70 border border-emerald-100 p-3 rounded-xl">
+                          <div className="flex items-center space-x-1 text-emerald-600 mb-1">
+                            <Leaf className="w-4 h-4" />
+                            <span className="text-xs font-medium">{t.canopyCover}</span>
+                          </div>
+                          <span className="text-xl font-extrabold text-emerald-700">{selectedWard.canopy}%</span>
+                          <span className="text-[9px] text-rose-500 block font-semibold">Deficit: -{(25 - selectedWard.canopy).toFixed(1)}%</span>
+                        </div>
+
+                        <div className="bg-slate-50 border border-slate-200 p-3 rounded-xl">
+                          <span className="text-xs text-slate-500 block mb-1">{t.heatAnomaly}</span>
+                          <span className="text-base font-bold text-rose-600">{selectedWard.heatAnomaly}</span>
+                        </div>
+
+                        <div className="bg-slate-50 border border-slate-200 p-3 rounded-xl">
+                          <span className="text-xs text-slate-500 block mb-1">{t.imperviousSurface}</span>
+                          <span className="text-base font-bold text-slate-800">{selectedWard.imperviousRatio}% Paved</span>
+                        </div>
+                      </div>
+
+                      {/* Micro-Climate Classification & Soil Type */}
+                      <div className="mt-3 p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-1.5">
+                        <div className="flex justify-between">
+                          <span className="text-slate-400 font-medium">UHI Classification:</span>
+                          <span className="font-bold text-slate-800 text-right">{selectedWard.uhiClassification}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-slate-400 font-medium">NDVI Index:</span>
+                          <span className="font-mono font-bold text-emerald-700">{selectedWard.ndvi} (Sentinel-2)</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-slate-400 font-medium">Surface Albedo:</span>
+                          <span className="font-mono font-bold text-slate-700">{selectedWard.albedo}</span>
+                        </div>
+                      </div>
+
+                      {/* Native Species Recommendation Box */}
+                      <div className="mt-3 p-3 bg-emerald-50/60 rounded-xl border border-emerald-200 text-xs">
+                        <span className="text-[10px] uppercase font-bold text-emerald-800 block mb-0.5">
+                          Recommended Native Species:
+                        </span>
+                        <span className="font-semibold text-emerald-950 text-[11px] block">
+                          {selectedWard.recommendedSpecies}
+                        </span>
+                      </div>
+
+                      {/* CSR Sponsor Badge */}
+                      <div className="mt-3 p-3 bg-emerald-950 text-white rounded-xl flex items-center justify-between text-xs">
+                        <div>
+                          <span className="text-[10px] uppercase text-emerald-300 block font-semibold">{t.csrSponsor}</span>
+                          <span className="text-sm font-bold">{selectedWard.sponsor}</span>
+                        </div>
+                        <Building2 className="w-5 h-5 text-emerald-400" />
+                      </div>
+                    </div>
+
+                    {/* Action Buttons: Simulator & Cross-Module to Member 4 */}
+                    <div className="space-y-2 pt-2">
+                      <button
+                        onClick={() => setGisSubTab('simulator')}
+                        className="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs py-2.5 px-3 rounded-xl shadow transition flex items-center justify-center space-x-1.5"
+                      >
+                        <Sliders className="w-4 h-4 text-emerald-300" />
+                        <span>Run Afforestation Cooling Simulator</span>
+                      </button>
+
+                      <button
+                        onClick={() => handleOpenWardSaplings(selectedWard)}
+                        className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs py-2.5 px-3 rounded-xl border border-slate-200 transition flex items-center justify-center space-x-1.5"
+                      >
+                        <Eye className="w-4 h-4 text-emerald-600" />
+                        <span>{t.viewWardSaplings || "View Ward Saplings"} ({selectedWard.tagged})</span>
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          handleRegWardChange(selectedWard.id);
+                          setLoggerSubTab('register');
+                          setActiveTab('geotag');
+                        }}
+                        className="w-full bg-[#064E3B] hover:bg-emerald-900 text-white font-bold text-xs py-2.5 px-3 rounded-xl shadow transition flex items-center justify-center space-x-1.5"
+                      >
+                        <PlusCircle className="w-4 h-4 text-emerald-400" />
+                        <span>{t.logAuditForWard}</span>
+                      </button>
+                    </div>
+
+                  </div>
+
+                </div>
+
+                {/* Heatmap Ward Cards Strip with Filter & Search */}
+                <div className="space-y-3">
+                  <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                    <h3 className="text-sm font-bold text-slate-700 uppercase tracking-wider">
+                      All 10 Visakhapatnam Wards At A Glance
+                    </h3>
+                    
+                    {/* Thermal Filter Pills */}
+                    <div className="flex flex-wrap items-center gap-1 text-xs">
+                      {['ALL', 'CRITICAL', 'HIGH', 'MODERATE', 'COOL'].map((f) => (
                         <button
-                          key={ward.id}
-                          onClick={() => setSelectedWard(ward)}
-                          className={`relative group transition-transform active:scale-95 p-2 rounded-xl flex flex-col items-center justify-center border shadow-lg ${
-                            isSelected 
-                              ? 'ring-2 ring-emerald-400 ring-offset-2 ring-offset-slate-900 bg-slate-900 border-emerald-500 z-20 scale-105' 
-                              : 'bg-slate-900/90 border-slate-700 hover:border-slate-500'
+                          key={f}
+                          onClick={() => setThermalFilter(f)}
+                          className={`px-2.5 py-1 rounded-lg font-semibold transition text-[11px] ${
+                            thermalFilter === f
+                              ? 'bg-[#064E3B] text-white shadow-sm'
+                              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                           }`}
                         >
-                          <div className="relative mb-1">
-                            <span className={`w-3.5 h-3.5 rounded-full block ${
-                              isHigh ? 'bg-rose-500 animate-ping' : isMed ? 'bg-amber-500' : 'bg-emerald-500'
-                            }`} />
-                            <span className={`w-3.5 h-3.5 rounded-full block absolute top-0 left-0 ${
-                              isHigh ? 'bg-rose-500' : isMed ? 'bg-amber-500' : 'bg-emerald-500'
-                            }`} />
-                          </div>
-
-                          <span className="text-[11px] font-bold text-slate-100 truncate max-w-[80px]">{ward.id}</span>
-                          <span className={`text-[10px] font-semibold ${isHigh ? 'text-rose-400' : isMed ? 'text-amber-400' : 'text-emerald-400'}`}>
-                            {ward.lst}°C
-                          </span>
-
-                          <div className="absolute bottom-full mb-2 hidden group-hover:flex flex-col items-center bg-slate-950 text-white text-[10px] p-2 rounded shadow-lg border border-slate-700 whitespace-nowrap z-30">
-                            <span className="font-bold">{ward.name}</span>
-                            <span>Canopy: {ward.canopy}%</span>
-                          </div>
+                          {f === 'ALL' && t.filterAllWards}
+                          {f === 'CRITICAL' && t.filterCriticalHeat}
+                          {f === 'HIGH' && t.filterSevereHeat}
+                          {f === 'MODERATE' && t.filterModerateHeat}
+                          {f === 'COOL' && t.filterCoolBuffer}
                         </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+                    {filteredMapWards.map((w) => {
+                      const temp = getTemporalTemp(w.lst - (w.simulatedCooling || 0), temporalOverpass);
+                      return (
+                        <div 
+                          key={w.id} 
+                          onClick={() => setSelectedWard(w)}
+                          className={`p-3 rounded-xl border bg-white cursor-pointer transition hover:shadow-md ${
+                            selectedWard.id === w.id ? 'border-emerald-600 ring-2 ring-emerald-500' : 'border-slate-200'
+                          }`}
+                        >
+                          <div className="flex justify-between items-start mb-1">
+                            <span className="text-xs font-bold text-slate-800">{w.id}</span>
+                            <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
+                              temp >= 38 ? 'bg-rose-100 text-rose-700' : temp >= 36 ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700'
+                            }`}>
+                              {temp}°C
+                            </span>
+                          </div>
+                          <p className="text-[11px] text-slate-600 truncate font-medium">{w.name}</p>
+                          <div className="mt-2 text-[10px] text-slate-400 flex justify-between">
+                            <span>Sponsor: {w.sponsor}</span>
+                            <span>{w.canopy}% Canopy</span>
+                          </div>
+                        </div>
                       );
                     })}
                   </div>
+                </div>
 
-                  <div className="absolute bottom-3 left-3 bg-slate-950/80 backdrop-blur border border-slate-800 text-[11px] text-slate-300 px-3 py-1.5 rounded-lg flex items-center space-x-2">
-                    <MapPin className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>Click any ward marker to inspect micro-climate metrics</span>
+              </div>
+            )}
+
+            {/* SUB-TAB 2: WARD MICRO-CLIMATE TELEMETRY DEEP-DIVE */}
+            {gisSubTab === 'telemetry' && (
+              <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                
+                {/* Header & Ward Selector */}
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-100 pb-4">
+                  <div>
+                    <h2 className="text-lg font-bold text-[#064E3B] flex items-center space-x-2">
+                      <Activity className="w-5 h-5 text-emerald-600" />
+                      <span>Visakhapatnam Ward Telemetry Diagnostic</span>
+                    </h2>
+                    <p className="text-xs text-slate-500">Multi-spectral Landsat-9 and Sentinel-2 bioclimatic analysis for {selectedWard.name}</p>
+                  </div>
+
+                  <select
+                    value={selectedWard.id}
+                    onChange={(e) => {
+                      const found = wards.find(w => w.id === e.target.value);
+                      if (found) setSelectedWard(found);
+                    }}
+                    className="bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  >
+                    {wards.map((w) => (
+                      <option key={w.id} value={w.id}>{w.name} ({w.lst}°C - {w.priority})</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* 6 Primary Telemetry Gauges Grid */}
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-xs">
+                  
+                  <div className="p-4 bg-rose-50/60 rounded-xl border border-rose-200 space-y-1">
+                    <span className="text-slate-400 font-semibold block">{t.surfaceTemp}</span>
+                    <span className="text-2xl font-black text-rose-700">{selectedWard.lst}°C</span>
+                    <span className="text-[10px] text-rose-600 block">Landsat-9 Thermal Infrared Band 10</span>
+                  </div>
+
+                  <div className="p-4 bg-amber-50/60 rounded-xl border border-amber-200 space-y-1">
+                    <span className="text-slate-400 font-semibold block">{t.heatAnomaly}</span>
+                    <span className="text-2xl font-black text-amber-700">{selectedWard.heatAnomaly}</span>
+                    <span className="text-[10px] text-slate-500 block">Above coastal mean (31.5°C)</span>
+                  </div>
+
+                  <div className="p-4 bg-emerald-50/60 rounded-xl border border-emerald-200 space-y-1">
+                    <span className="text-slate-400 font-semibold block">{t.canopyCover}</span>
+                    <span className="text-2xl font-black text-emerald-700">{selectedWard.canopy}%</span>
+                    <span className="text-[10px] text-rose-500 font-bold block">Deficit: -{(25 - selectedWard.canopy).toFixed(1)}% vs National Goal</span>
+                  </div>
+
+                  <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                    <span className="text-slate-400 font-semibold block">{t.ndviIndex}</span>
+                    <span className="text-2xl font-black text-slate-800">{selectedWard.ndvi}</span>
+                    <span className="text-[10px] text-emerald-600 block">Sentinel-2 MSI (10m Resolution)</span>
+                  </div>
+
+                  <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                    <span className="text-slate-400 font-semibold block">{t.imperviousSurface}</span>
+                    <span className="text-2xl font-black text-slate-800">{selectedWard.imperviousRatio}%</span>
+                    <span className="text-[10px] text-slate-500 block">Paved concrete & asphalt fraction</span>
+                  </div>
+
+                  <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                    <span className="text-slate-400 font-semibold block">{t.surfaceAlbedo}</span>
+                    <span className="text-2xl font-black text-slate-800">{selectedWard.albedo}</span>
+                    <span className="text-[10px] text-slate-500 block">Solar reflectance coefficient</span>
+                  </div>
+
+                </div>
+
+                {/* Micro-Climate Stress & Bio-Terrain Analysis */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2 text-xs">
+                    <span className="font-bold text-slate-800 flex items-center space-x-1.5">
+                      <Thermometer className="w-4 h-4 text-rose-600" />
+                      <span>Micro-Climate Risk Classification</span>
+                    </span>
+                    <p className="text-slate-600 leading-relaxed font-semibold text-sm text-[#064E3B]">
+                      {selectedWard.uhiClassification}
+                    </p>
+                    <p className="text-slate-500 text-xs">
+                      {selectedWard.description}
+                    </p>
+                  </div>
+
+                  <div className="bg-emerald-50/40 p-4 rounded-xl border border-emerald-200 space-y-2 text-xs">
+                    <span className="font-bold text-emerald-950 flex items-center space-x-1.5">
+                      <Leaf className="w-4 h-4 text-emerald-600" />
+                      <span>{t.recommendedNativeSpecies}</span>
+                    </span>
+                    <p className="text-emerald-900 font-bold text-sm">
+                      {selectedWard.recommendedSpecies}
+                    </p>
+                    <p className="text-slate-500 text-xs">
+                      Soil Profile: <strong className="text-slate-700">{selectedWard.soilType}</strong>
+                    </p>
                   </div>
                 </div>
-              </div>
 
-              {/* Selected Ward Profile Drawer */}
-              <div className="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm flex flex-col justify-between space-y-4">
-                <div>
-                  <div className="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
-                    <span className="text-xs font-semibold uppercase text-slate-400 tracking-wider">Ward Micro-Climate</span>
-                    <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${
-                      selectedWard.priority === 'Critical Priority' || selectedWard.priority === 'High Priority'
-                        ? 'bg-rose-100 text-rose-700 border border-rose-200'
-                        : selectedWard.priority === 'Medium Priority'
-                        ? 'bg-amber-100 text-amber-700 border border-amber-200'
-                        : 'bg-emerald-100 text-emerald-700 border border-emerald-200'
-                    }`}>
-                      {selectedWard.priority}
+                {/* Compare All Wards Side-by-Side Strip */}
+                <div className="space-y-3 pt-2">
+                  <span className="text-xs font-bold uppercase text-slate-500 tracking-wider">
+                    Quick Micro-Climate Selector
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {wards.map((w) => (
+                      <button
+                        key={w.id}
+                        onClick={() => setSelectedWard(w)}
+                        className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition ${
+                          selectedWard.id === w.id 
+                            ? 'bg-[#064E3B] text-white border-emerald-700 shadow-sm'
+                            : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
+                        }`}
+                      >
+                        {w.id} ({w.lst}°C)
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+            )}
+
+            {/* SUB-TAB 3: WHAT-IF AFFORESTATION COOLING SIMULATOR */}
+            {gisSubTab === 'simulator' && (
+              <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                
+                {/* Header */}
+                <div className="border-b border-slate-100 pb-4">
+                  <div className="inline-flex items-center space-x-1.5 bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full mb-1">
+                    <Sliders className="w-3 h-3 text-emerald-700" />
+                    <span>Mathematical Urban Forestry Physics Engine</span>
+                  </div>
+                  <h2 className="text-lg font-bold text-[#064E3B]">{t.simTitle}</h2>
+                  <p className="text-xs text-slate-500">{t.simSub}</p>
+                </div>
+
+                {simAppliedSuccess && (
+                  <div className="bg-emerald-100 border border-emerald-300 text-emerald-800 p-4 rounded-xl flex items-center space-x-2 animate-bounce text-xs font-bold">
+                    <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                    <span>{simAppliedSuccess}</span>
+                  </div>
+                )}
+
+                {/* Active Ward Banner */}
+                <div className="bg-emerald-950 text-white p-4 rounded-xl flex flex-col sm:flex-row justify-between sm:items-center gap-3">
+                  <div>
+                    <span className="text-[10px] text-emerald-300 uppercase font-semibold block">Target Micro-Climate Ward:</span>
+                    <h3 className="text-base font-bold">{selectedWard.name} ({selectedWard.id})</h3>
+                    <p className="text-xs text-slate-300">Baseline LST: {selectedWard.lst}°C • Current Canopy: {selectedWard.canopy}%</p>
+                  </div>
+
+                  <select
+                    value={selectedWard.id}
+                    onChange={(e) => {
+                      const found = wards.find(w => w.id === e.target.value);
+                      if (found) setSelectedWard(found);
+                    }}
+                    className="bg-emerald-900 border border-emerald-700 text-white text-xs font-semibold rounded-xl px-3 py-2"
+                  >
+                    {wards.map((w) => (
+                      <option key={w.id} value={w.id}>{w.name}</option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Simulator Inputs Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  
+                  {/* Slider Control */}
+                  <div className="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4">
+                    <div className="flex justify-between items-center">
+                      <label className="text-xs font-bold text-slate-700 uppercase">
+                        {t.simSaplingSlider}
+                      </label>
+                      <span className="text-lg font-extrabold text-[#064E3B]">
+                        {simSaplingsCount.toLocaleString()} Saplings
+                      </span>
+                    </div>
+
+                    <input
+                      type="range"
+                      min="200"
+                      max="5000"
+                      step="100"
+                      value={simSaplingsCount}
+                      onChange={(e) => setSimSaplingsCount(+e.target.value)}
+                      className="w-full accent-emerald-600 cursor-pointer"
+                    />
+
+                    <div className="flex justify-between text-[10px] text-slate-400 font-semibold">
+                      <span>200 (Pilot)</span>
+                      <span>2,500 (Ward Belt)</span>
+                      <span>5,000 (Full Afforestation)</span>
+                    </div>
+                  </div>
+
+                  {/* Species Mix Selector */}
+                  <div className="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-3">
+                    <label className="text-xs font-bold text-slate-700 uppercase block">
+                      {t.simTargetSpecies}
+                    </label>
+
+                    <div className="space-y-2 text-xs">
+                      <label className="flex items-center space-x-2 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="speciesMix"
+                          checked={simSpeciesMix === 'balanced'}
+                          onChange={() => setSimSpeciesMix('balanced')}
+                          className="accent-emerald-600"
+                        />
+                        <span className="font-semibold text-slate-700">Balanced Native Mix (Neem, Pungam, Badam)</span>
+                      </label>
+
+                      <label className="flex items-center space-x-2 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="speciesMix"
+                          checked={simSpeciesMix === 'dense_shade'}
+                          onChange={() => setSimSpeciesMix('dense_shade')}
+                          className="accent-emerald-600"
+                        />
+                        <span className="font-semibold text-slate-700">Dense Shade Canopy (Azadirachta indica & Banyan)</span>
+                      </label>
+
+                      <label className="flex items-center space-x-2 cursor-pointer">
+                        <input
+                          type="radio"
+                          name="speciesMix"
+                          checked={simSpeciesMix === 'windbreak'}
+                          onChange={() => setSimSpeciesMix('windbreak')}
+                          className="accent-emerald-600"
+                        />
+                        <span className="font-semibold text-slate-700">Coastal Windbreak & Industrial Gas Resilient (Casuarina)</span>
+                      </label>
+                    </div>
+                  </div>
+
+                </div>
+
+                {/* Mathematical Projection Results */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+                  
+                  <div className="bg-rose-50 border border-rose-200 p-4 rounded-xl space-y-1">
+                    <span className="text-slate-400 font-semibold block">{t.simCoolingResult}</span>
+                    <span className="text-2xl font-black text-rose-700">-{projectedCooling}°C</span>
+                    <span className="text-[10px] text-slate-500 block">
+                      New LST: {(selectedWard.lst - projectedCooling).toFixed(1)}°C
                     </span>
                   </div>
 
-                  <h2 className="text-lg font-bold text-[#064E3B]">{selectedWard.name}</h2>
-                  <p className="text-xs text-slate-500 mt-1">{selectedWard.description}</p>
-
-                  <div className="grid grid-cols-2 gap-3 mt-4">
-                    <div className="bg-rose-50/60 border border-rose-100 p-3 rounded-xl">
-                      <div className="flex items-center space-x-1 text-rose-600 mb-1">
-                        <Flame className="w-4 h-4" />
-                        <span className="text-xs font-medium">{t.surfaceTemp}</span>
-                      </div>
-                      <span className="text-xl font-extrabold text-rose-700">{selectedWard.lst}°C</span>
-                    </div>
-
-                    <div className="bg-emerald-50/60 border border-emerald-100 p-3 rounded-xl">
-                      <div className="flex items-center space-x-1 text-emerald-600 mb-1">
-                        <Leaf className="w-4 h-4" />
-                        <span className="text-xs font-medium">{t.canopyCover}</span>
-                      </div>
-                      <span className="text-xl font-extrabold text-emerald-700">{selectedWard.canopy}%</span>
-                    </div>
-
-                    <div className="bg-slate-50 border border-slate-200 p-3 rounded-xl">
-                      <span className="text-xs text-slate-500 block mb-1">{t.taggedTrees}</span>
-                      <span className="text-lg font-bold text-slate-800">{selectedWard.tagged}</span>
-                    </div>
-
-                    <div className="bg-slate-50 border border-slate-200 p-3 rounded-xl">
-                      <span className="text-xs text-slate-500 block mb-1">{t.survivalRate}</span>
-                      <span className="text-lg font-bold text-emerald-600">{selectedWard.survival}%</span>
-                    </div>
+                  <div className="bg-emerald-50 border border-emerald-200 p-4 rounded-xl space-y-1">
+                    <span className="text-slate-400 font-semibold block">{t.simCanopyResult}</span>
+                    <span className="text-2xl font-black text-emerald-700">+{projectedCanopyGain}%</span>
+                    <span className="text-[10px] text-slate-500 block">
+                      New Canopy: {(selectedWard.canopy + projectedCanopyGain).toFixed(1)}%
+                    </span>
                   </div>
 
-                  <div className="mt-4 p-3 bg-emerald-950 text-white rounded-xl flex items-center justify-between">
-                    <div>
-                      <span className="text-[10px] uppercase text-emerald-300 block font-semibold">{t.csrSponsor}</span>
-                      <span className="text-sm font-bold">{selectedWard.sponsor}</span>
-                    </div>
-                    <Building2 className="w-5 h-5 text-emerald-400" />
+                  <div className="bg-sky-50 border border-sky-200 p-4 rounded-xl space-y-1">
+                    <span className="text-slate-400 font-semibold block">{t.simCarbonResult}</span>
+                    <span className="text-2xl font-black text-sky-800">+{projectedCo2} MT</span>
+                    <span className="text-[10px] text-slate-500 block">Metric Tons CO2 / year</span>
                   </div>
+
+                  <div className="bg-amber-50 border border-amber-200 p-4 rounded-xl space-y-1">
+                    <span className="text-slate-400 font-semibold block">{t.simMoistureResult}</span>
+                    <span className="text-2xl font-black text-amber-700">+{projectedMoistureGain}%</span>
+                    <span className="text-[10px] text-slate-500 block">Micro-climate humidity buffer</span>
+                  </div>
+
                 </div>
 
                 {/* Action Buttons */}
-                <div className="space-y-2">
+                <div className="flex flex-col sm:flex-row gap-3 pt-2">
                   <button
-                    onClick={() => handleOpenWardSaplings(selectedWard)}
-                    className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs py-2.5 px-4 rounded-xl border border-slate-200 transition flex items-center justify-center space-x-2"
+                    onClick={handleApplySimulation}
+                    className="flex-1 bg-[#064E3B] hover:bg-emerald-900 text-white font-bold py-3 px-4 rounded-xl shadow transition flex items-center justify-center space-x-2 text-xs"
                   >
-                    <Eye className="w-4 h-4 text-emerald-600" />
-                    <span>{t.viewWardSaplings} ({selectedWard.tagged})</span>
+                    <Check className="w-4 h-4 text-emerald-300" />
+                    <span>{t.simApplyBtn}</span>
+                  </button>
+
+                  <button
+                    onClick={handleResetSimulation}
+                    className="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-3 px-4 rounded-xl transition text-xs"
+                  >
+                    {t.simResetBtn}
                   </button>
 
                   <button
                     onClick={() => {
                       handleRegWardChange(selectedWard.id);
-                      setLoggerWardId(selectedWard.id);
                       setLoggerSubTab('register');
                       setActiveTab('geotag');
                     }}
-                    className="w-full bg-[#064E3B] hover:bg-emerald-900 text-white font-semibold text-sm py-2.5 px-4 rounded-xl shadow transition flex items-center justify-center space-x-2"
+                    className="bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 px-4 rounded-xl shadow transition flex items-center justify-center space-x-1.5 text-xs"
                   >
-                    <PlusCircle className="w-4 h-4 text-emerald-400" />
-                    <span>{t.logAuditForWard}</span>
+                    <PlusCircle className="w-4 h-4 text-white" />
+                    <span>Register Field Plantings</span>
                   </button>
                 </div>
+
               </div>
+            )}
 
-            </div>
-
-            {/* Heatmap Ward Cards Grid */}
-            <div className="space-y-3">
-              <h3 className="text-sm font-bold text-slate-700 uppercase tracking-wider">All 10 Visakhapatnam Wards At A Glance</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-                {wards.map((w) => (
-                  <div 
-                    key={w.id} 
-                    onClick={() => setSelectedWard(w)}
-                    className={`p-3 rounded-xl border bg-white cursor-pointer transition hover:shadow-md ${
-                      selectedWard.id === w.id ? 'border-emerald-600 ring-1 ring-emerald-500' : 'border-slate-200'
-                    }`}
-                  >
-                    <div className="flex justify-between items-start mb-1">
-                      <span className="text-xs font-bold text-slate-800">{w.id}</span>
-                      <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
-                        w.lst >= 38 ? 'bg-rose-100 text-rose-700' : 'bg-emerald-100 text-emerald-700'
-                      }`}>
-                        {w.lst}°C
-                      </span>
-                    </div>
-                    <p className="text-[11px] text-slate-500 truncate">{w.name}</p>
-                    <div className="mt-2 text-[10px] text-slate-400 flex justify-between">
-                      <span>Sponsor: {w.sponsor}</span>
-                      <span>{w.survival}% Alive</span>
-                    </div>
+            {/* SUB-TAB 4: WARD THERMAL INDEX & HEAT RANKING */}
+            {gisSubTab === 'ranking' && (
+              <div className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                
+                {/* Search & Sort Controls */}
+                <div className="flex flex-col md:flex-row justify-between md:items-center gap-3">
+                  <div>
+                    <h2 className="text-base font-bold text-slate-800">Visakhapatnam Ward Heat & Canopy Ledger</h2>
+                    <p className="text-xs text-slate-500">Sorted by live Landsat thermal telemetry and remote sensing canopy metrics</p>
                   </div>
-                ))}
+
+                  <div className="flex flex-wrap items-center gap-2">
+                    <div className="relative">
+                      <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-3" />
+                      <input
+                        type="text"
+                        placeholder="Search ward or sponsor..."
+                        value={mapSearchTerm}
+                        onChange={(e) => setMapSearchTerm(e.target.value)}
+                        className="bg-slate-50 border border-slate-200 rounded-xl pl-8 pr-3 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-emerald-500 w-48 sm:w-56"
+                      />
+                    </div>
+
+                    <select
+                      value={thermalSort}
+                      onChange={(e) => setThermalSort(e.target.value)}
+                      className="bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-1.5 text-xs text-slate-700 font-semibold focus:outline-none"
+                    >
+                      <option value="HOTTEST">{t.sortByHottest}</option>
+                      <option value="COOLEST">{t.sortByCoolest}</option>
+                      <option value="LOWEST_CANOPY">{t.sortByLowestCanopy}</option>
+                      <option value="MOST_SAPLINGS">{t.sortByHighestSaplings}</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Table */}
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs border-collapse">
+                    <thead>
+                      <tr className="bg-slate-50 text-slate-500 border-b border-slate-200">
+                        <th className="p-3 font-semibold">Ward ID & Name</th>
+                        <th className="p-3 font-semibold">Surface Temp (°C)</th>
+                        <th className="p-3 font-semibold">Heat Anomaly</th>
+                        <th className="p-3 font-semibold">Canopy Cover</th>
+                        <th className="p-3 font-semibold">NDVI Index</th>
+                        <th className="p-3 font-semibold">Impervious Ratio</th>
+                        <th className="p-3 font-semibold">Priority Status</th>
+                        <th className="p-3 font-semibold">CSR Sponsor</th>
+                        <th className="p-3 font-semibold">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100">
+                      {filteredMapWards.map((w, index) => {
+                        const temp = getTemporalTemp(w.lst - (w.simulatedCooling || 0), temporalOverpass);
+                        return (
+                          <tr key={w.id} className="hover:bg-slate-50/80 transition">
+                            <td className="p-3 font-bold text-slate-800">
+                              <span className="text-[10px] text-slate-400 mr-2">#{index + 1}</span>
+                              {w.name}
+                            </td>
+                            <td className="p-3">
+                              <span className={`font-black ${temp >= 38 ? 'text-rose-600' : temp >= 36 ? 'text-amber-600' : 'text-slate-800'}`}>
+                                {temp}°C
+                              </span>
+                            </td>
+                            <td className="p-3 font-bold text-rose-600">{w.heatAnomaly}</td>
+                            <td className="p-3">
+                              <div className="flex items-center space-x-2">
+                                <span className="font-semibold text-slate-700">{w.canopy}%</span>
+                                <div className="w-16 bg-slate-200 h-1.5 rounded-full overflow-hidden">
+                                  <div className="bg-emerald-500 h-full" style={{ width: `${Math.min(100, (w.canopy / 25) * 100)}%` }}></div>
+                                </div>
+                              </div>
+                            </td>
+                            <td className="p-3 font-mono font-bold text-emerald-700">{w.ndvi}</td>
+                            <td className="p-3 text-slate-600">{w.imperviousRatio}%</td>
+                            <td className="p-3">
+                              <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                                w.priority === 'Critical Priority' || w.priority === 'High Priority'
+                                  ? 'bg-rose-100 text-rose-700'
+                                  : 'bg-emerald-100 text-emerald-700'
+                              }`}>
+                                {w.priority}
+                              </span>
+                            </td>
+                            <td className="p-3 font-medium text-slate-600">{w.sponsor}</td>
+                            <td className="p-3">
+                              <button
+                                onClick={() => {
+                                  setSelectedWard(w);
+                                  setGisSubTab('simulator');
+                                }}
+                                className="bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-bold px-2.5 py-1 rounded-lg text-[10px] transition"
+                              >
+                                Simulate
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+
               </div>
-            </div>
+            )}
 
           </div>
         )}
