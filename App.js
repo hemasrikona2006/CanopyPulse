@@ -52,7 +52,9 @@ const TRANSLATIONS = {
     healthStatus: "Health Status",
     actionRequired: "Action Required",
     saveLogBtn: "Save Audit Log to Database",
-    savedSuccess: "Audit Log Saved to Local Storage!",
+    savedSuccess: "Audit Log & Sapling Record Saved to Database!",
+    dbLive: "Database API Live",
+    dbOffline: "Local Mode",
 
     // Dashboard
     dashTitle: "Corporate CSR Executive Compliance Dashboard",
@@ -125,7 +127,9 @@ const TRANSLATIONS = {
     healthStatus: "ఆరోగ్య పరి స్థితి",
     actionRequired: "చేయవలసిన చర్య",
     saveLogBtn: "ఆడిట్ లాగ్‌ను సేవ్ చేయండి",
-    savedSuccess: "ఆడిట్ లాగ్ సేవ్ చేయబడింది!",
+    savedSuccess: "ఆడిట్ లాగ్ & మొక్క రికార్డు డేటాబేస్‌లో సేవ్ చేయబడింది!",
+    dbLive: "డేటాబేస్ API లైవ్",
+    dbOffline: "స్థానిక మోడ్",
 
     // Dashboard
     dashTitle: "కార్పొరేట్ CSR కార్యనిర్వాహక నివేదిక",
@@ -195,8 +199,34 @@ export default function App() {
   // Report Modal
   const [showPdfModal, setShowPdfModal] = useState(false);
 
+  // Database Connection State (Member 3 API Integration)
+  const [isBackendConnected, setIsBackendConnected] = useState(false);
+
   // Helper text lookup
   const t = TRANSLATIONS[lang];
+
+  // Sync with Backend API on component mount
+  useEffect(() => {
+    let isMounted = true;
+    async function loadBackendData() {
+      try {
+        const res = await fetch('/api/wards');
+        if (res.ok) {
+          const data = await res.json();
+          if (isMounted && Array.isArray(data) && data.length > 0) {
+            setWards(data);
+            setIsBackendConnected(true);
+            return;
+          }
+        }
+      } catch (err) {
+        // Fall back gracefully to localStorage or initial dataset
+      }
+      if (isMounted) setIsBackendConnected(false);
+    }
+    loadBackendData();
+    return () => { isMounted = false; };
+  }, []);
 
   // Save to localStorage on ward state change
   useEffect(() => {
@@ -204,7 +234,12 @@ export default function App() {
   }, [wards]);
 
   // --- HANDLERS ---
-  const handleClearData = () => {
+  const handleClearData = async () => {
+    try {
+      await fetch('/api/reset', { method: 'POST' });
+    } catch (e) {
+      // offline fallback
+    }
     localStorage.removeItem('canopypulse_wards_v2');
     setWards(INITIAL_VIZAG_WARDS);
     setSelectedWard(INITIAL_VIZAG_WARDS[0]);
@@ -312,13 +347,44 @@ export default function App() {
     }
   };
 
-  const handleSaveAuditLog = () => {
+  const handleSaveAuditLog = async () => {
     if (!aiResult) {
       alert('Please run the AI Verification first before saving!');
       return;
     }
 
-    // Update target ward in state and localStorage
+    // Attempt to store sapling record in Backend Database (Member 3 API)
+    try {
+      const response = await fetch('/api/saplings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ward_id: loggerWardId,
+          species: loggerSpecies,
+          photo_base64: imageRawBase64,
+          latitude: 17.6868,
+          longitude: 83.2185,
+          gps_accuracy: 4.0,
+          survival_status: aiResult.health_status && aiResult.health_status.toLowerCase().includes('drought') 
+            ? 'Drought Stressed' 
+            : 'Healthy',
+          confidence_score: aiResult.confidence || 0.95,
+          action_required: aiResult.action_required || 'Standard monitoring',
+          auditor_name: 'Vizag CSR Volunteer'
+        })
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        if (result.updatedWard) {
+          setWards((prev) => prev.map((w) => (w.id === loggerWardId ? result.updatedWard : w)));
+        }
+      }
+    } catch (err) {
+      console.warn('[CanopyPulse] Backend database API unreachable, updating local state:', err);
+    }
+
+    // Always update target ward in local state and localStorage for instant offline resilience
     const updated = wards.map((w) => {
       if (w.id === loggerWardId) {
         return {
@@ -882,14 +948,26 @@ export default function App() {
                 <p className="text-sm text-slate-600 mt-1">{t.dashSub}</p>
               </div>
 
-              {/* Printable PDF Certificate Modal Trigger */}
-              <button
-                onClick={() => setShowPdfModal(true)}
-                className="bg-[#064E3B] hover:bg-emerald-900 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center space-x-2 border border-emerald-700"
-              >
-                <Download className="w-4 h-4 text-emerald-300" />
-                <span>{t.downloadReportBtn}</span>
-              </button>
+              {/* Actions & Live Database Status Indicator */}
+              <div className="flex items-center space-x-2.5">
+                <div className={`px-2.5 py-1.5 rounded-xl border text-[11px] font-semibold flex items-center space-x-1.5 ${
+                  isBackendConnected 
+                    ? 'bg-emerald-50 text-emerald-800 border-emerald-200' 
+                    : 'bg-slate-50 text-slate-500 border-slate-200'
+                }`}>
+                  <span className={`w-2 h-2 rounded-full ${isBackendConnected ? 'bg-emerald-500 animate-pulse' : 'bg-slate-400'}`}></span>
+                  <span>{isBackendConnected ? t.dbLive : t.dbOffline}</span>
+                </div>
+
+                {/* Printable PDF Certificate Modal Trigger */}
+                <button
+                  onClick={() => setShowPdfModal(true)}
+                  className="bg-[#064E3B] hover:bg-emerald-900 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center space-x-2 border border-emerald-700"
+                >
+                  <Download className="w-4 h-4 text-emerald-300" />
+                  <span>{t.downloadReportBtn}</span>
+                </button>
+              </div>
             </div>
 
             {/* Executive KPI Cards */}

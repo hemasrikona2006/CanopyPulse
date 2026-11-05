@@ -1,4 +1,3 @@
-HEAD
 # Logs
 logs
 *.log
@@ -154,4 +153,11 @@ dist/
 .env
 .env.local
 .DS_Store
-6613856 (Initial CanoyPulse prototype upload)
+
+# Backend runtime data & uploads
+backend/data/*.tmp
+backend/uploads/*
+!backend/uploads/.gitkeep
+backend/data/*
+!backend/data/.gitkeep
+!backend/data/canopypulse_db.json

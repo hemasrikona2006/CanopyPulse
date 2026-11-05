@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "server": "node backend/server.js",
+    "seed": "node backend/seed.js",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -23,4 +25,3 @@
     "vite": "^6.0.7"
   }
 }
-
