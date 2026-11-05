@@ -82,6 +82,18 @@ function canopyBackendPlugin() {
             return;
           }
 
+          if (req.method === 'GET' && pathname === '/api/pits') {
+            const pits = db.getPits();
+            res.end(JSON.stringify({ total: pits.length, data: pits }));
+            return;
+          }
+
+          if (req.method === 'GET' && pathname === '/api/alerts') {
+            const alerts = db.getCommunityAlerts();
+            res.end(JSON.stringify({ totalAlerts: alerts.length, data: alerts }));
+            return;
+          }
+
           if (req.method === 'GET' && pathname === '/api/dashboard/stats') {
             res.end(JSON.stringify(db.getDashboardStats()));
             return;
@@ -103,6 +115,30 @@ function canopyBackendPlugin() {
               const created = db.createSapling(data);
               res.statusCode = 201;
               res.end(JSON.stringify({ success: true, record: created, updatedWard: db.getWardById(data.ward_id) }));
+              return;
+            }
+
+            if (req.method === 'POST' && pathname === '/api/pits') {
+              const pit = db.createPit(data);
+              res.statusCode = 201;
+              res.end(JSON.stringify({ success: true, pit }));
+              return;
+            }
+
+            if (req.method === 'POST' && pathname.startsWith('/api/pits/') && pathname.endsWith('/plant')) {
+              const parts = pathname.split('/');
+              const pitId = parts[3];
+              const result = db.plantPit(pitId, data);
+              res.statusCode = 201;
+              res.end(JSON.stringify({ success: true, ...result }));
+              return;
+            }
+
+            if (req.method === 'POST' && pathname.startsWith('/api/saplings/') && pathname.endsWith('/water')) {
+              const parts = pathname.split('/');
+              const id = parts[3];
+              const result = db.waterSapling(id, data.citizen_name, data.liters);
+              res.end(JSON.stringify({ success: true, ...result }));
               return;
             }
 

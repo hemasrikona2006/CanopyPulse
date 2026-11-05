@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "platform": "CanopyPulse Visakhapatnam CSR Platform",
     "initializedAt": "2026-11-05T22:15:51.326Z",
-    "lastUpdatedAt": "2026-11-05T22:46:10.514Z"
+    "lastUpdatedAt": "2026-11-05T23:03:48.610Z"
   },
   "wards": [
     {
@@ -12,8 +12,8 @@
       "lst": 38.4,
       "canopy": 6.2,
       "priority": "High Priority",
-      "tagged": 450,
-      "survival": 82,
+      "tagged": 451,
+      "survival": 83,
       "sponsor": "HPCL",
       "lat": 17.6888,
       "lng": 83.2012,
@@ -78,7 +78,7 @@
       "canopy": 3.2,
       "priority": "Critical Priority",
       "tagged": 800,
-      "survival": 71,
+      "survival": 72,
       "sponsor": "HPCL",
       "lat": 17.66,
       "lng": 83.17,
@@ -139,6 +139,22 @@
   ],
   "saplings": [
     {
+      "id": "SAP-VIZ-0011",
+      "ward_id": "W65",
+      "species": "Pongamia pinnata (Pungam)",
+      "photo_url": "/uploads/default_sapling.jpg",
+      "latitude": 17.6892,
+      "longitude": 83.2018,
+      "gps_accuracy": 3.5,
+      "survival_status": "Healthy",
+      "growth_stage": "Freshly Planted Sapling (~1.5 ft)",
+      "canopy_spread_ft": 1,
+      "confidence_score": 0.98,
+      "action_required": "Newly planted! Water 3L daily for the first 2 weeks.",
+      "audited_at": "2026-11-05T23:03:48.607Z",
+      "auditor_name": "Community: GITAM Student Volunteers"
+    },
+    {
       "id": "SAP-VIZ-001",
       "ward_id": "W65",
       "species": "Pongamia pinnata (Pungam)",
@@ -160,10 +176,10 @@
       "latitude": 17.6605,
       "longitude": 83.1712,
       "gps_accuracy": 4.2,
-      "survival_status": "Drought Stressed",
+      "survival_status": "Healthy",
       "confidence_score": 0.92,
-      "action_required": "Immediate deep watering (5L) required. Re-tighten tree guard.",
-      "audited_at": "2026-11-04T22:46:10.506Z",
+      "action_required": "Watered recently by Vizag Youth Eco-Corps (5L). Soil moisture optimal. Next check in 7 days.",
+      "audited_at": "2026-11-05T23:03:38.563Z",
       "auditor_name": "Field Auditor HPCL-CSR"
     },
     {
@@ -281,6 +297,22 @@
   ],
   "audit_history": [
     {
+      "id": "AUD-1793919828607",
+      "sapling_id": "SAP-VIZ-0011",
+      "ward_id": "W65",
+      "status_before": "New Audit Logged",
+      "status_after": "Healthy",
+      "timestamp": "2026-11-05T23:03:48.607Z"
+    },
+    {
+      "id": "AUD-1793919818563",
+      "sapling_id": "SAP-VIZ-002",
+      "ward_id": "W60",
+      "status_before": "Drought Stressed",
+      "status_after": "Healthy (Community Watered)",
+      "timestamp": "2026-11-05T23:03:38.563Z"
+    },
+    {
       "id": "AUD-001",
       "sapling_id": "SAP-VIZ-001",
       "ward_id": "W65",
@@ -359,6 +391,73 @@
       "status_before": "Field Inspection",
       "status_after": "Healthy",
       "timestamp": "2026-11-04T22:46:10.507Z"
+    }
+  ],
+  "pits": [
+    {
+      "id": "PIT-VIZ-101",
+      "ward_id": "W65",
+      "latitude": 17.6892,
+      "longitude": 83.2018,
+      "depth_cm": 45,
+      "width_cm": 40,
+      "soil_condition": "Red Loamy Soil (GVMC Pre-dug Roadside Pit)",
+      "suggested_species": "Pongamia pinnata (Pungam)",
+      "species_reasoning": "High drought & vehicular emissions tolerance for Gajuwaka industrial corridor.",
+      "status": "Planted by GITAM Student Volunteers",
+      "detected_at": "2026-11-03T23:00:04.280Z",
+      "adopted_by": "GITAM Student Volunteers"
+    },
+    {
+      "id": "PIT-VIZ-102",
+      "ward_id": "W42",
+      "latitude": 17.7108,
+      "longitude": 83.3012,
+      "depth_cm": 50,
+      "width_cm": 45,
+      "soil_condition": "Compacted Urban Pavement Soil",
+      "suggested_species": "Azadirachta indica (Neem)",
+      "species_reasoning": "Maximum pedestrian shade canopy for dense market district.",
+      "status": "Ready for Planting",
+      "detected_at": "2026-11-04T23:00:04.280Z",
+      "adopted_by": null
+    },
+    {
+      "id": "PIT-VIZ-103",
+      "ward_id": "W60",
+      "latitude": 17.6612,
+      "longitude": 83.172,
+      "depth_cm": 40,
+      "width_cm": 40,
+      "soil_condition": "Dry Sandy Soil (Near Petroleum Refinery)",
+      "suggested_species": "Casuarina equisetifolia",
+      "species_reasoning": "Critical cooling windbreak for 40.1°C thermal island in Mindi Industrial Zone.",
+      "status": "Ready for Planting",
+      "detected_at": "2026-11-02T23:00:04.280Z",
+      "adopted_by": null
+    },
+    {
+      "id": "PIT-VIZ-104",
+      "ward_id": "W15",
+      "latitude": 17.7432,
+      "longitude": 83.3325,
+      "depth_cm": 55,
+      "width_cm": 50,
+      "soil_condition": "Fertile Coastal Loam",
+      "suggested_species": "Ficus benghalensis (Banyan)",
+      "species_reasoning": "Deep roots and massive shade canopy for MVP Colony green belt.",
+      "status": "Adopted by Rotary Eco Club",
+      "detected_at": "2026-11-01T23:00:04.280Z",
+      "adopted_by": "Rotary Eco Club"
+    }
+  ],
+  "community_waterings": [
+    {
+      "id": "WAT-1793919818563",
+      "sapling_id": "SAP-VIZ-002",
+      "citizen_name": "Vizag Youth Eco-Corps",
+      "liters": 5,
+      "timestamp": "2026-11-05T23:03:38.563Z"
     }
   ]
 }
