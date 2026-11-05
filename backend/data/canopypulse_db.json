@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "platform": "CanopyPulse Visakhapatnam CSR Platform",
     "initializedAt": "2026-11-05T22:15:51.326Z",
-    "lastUpdatedAt": "2026-11-05T22:15:51.327Z"
+    "lastUpdatedAt": "2026-11-05T22:46:10.514Z"
   },
   "wards": [
     {
@@ -149,7 +149,7 @@
       "survival_status": "Healthy",
       "confidence_score": 0.96,
       "action_required": "Sapling growth on track. Next check in 30 days.",
-      "audited_at": "2026-11-02T22:15:51.319Z",
+      "audited_at": "2026-11-02T22:46:10.505Z",
       "auditor_name": "Vizag Volunteer 04"
     },
     {
@@ -163,7 +163,7 @@
       "survival_status": "Drought Stressed",
       "confidence_score": 0.92,
       "action_required": "Immediate deep watering (5L) required. Re-tighten tree guard.",
-      "audited_at": "2026-11-04T22:15:51.325Z",
+      "audited_at": "2026-11-04T22:46:10.506Z",
       "auditor_name": "Field Auditor HPCL-CSR"
     },
     {
@@ -177,8 +177,106 @@
       "survival_status": "Healthy",
       "confidence_score": 0.94,
       "action_required": "Add 2L of water and clear surrounding weeds.",
-      "audited_at": "2026-11-03T22:15:51.325Z",
+      "audited_at": "2026-11-03T22:46:10.506Z",
       "auditor_name": "RINL Green Corps"
+    },
+    {
+      "id": "SAP-VIZ-004",
+      "ward_id": "W28",
+      "species": "Azadirachta indica (Neem)",
+      "photo_url": "/uploads/sample_neem_02.jpg",
+      "latitude": 17.7214,
+      "longitude": 83.3152,
+      "gps_accuracy": 3.5,
+      "survival_status": "Healthy",
+      "confidence_score": 0.98,
+      "action_required": "Vigorous leaf growth observed. Tree guard stable.",
+      "audited_at": "2026-11-01T22:46:10.506Z",
+      "auditor_name": "Siripuram Eco Circle"
+    },
+    {
+      "id": "SAP-VIZ-005",
+      "ward_id": "W15",
+      "species": "Ficus benghalensis (Banyan)",
+      "photo_url": "/uploads/sample_banyan_01.jpg",
+      "latitude": 17.7425,
+      "longitude": 83.3315,
+      "gps_accuracy": 3.2,
+      "survival_status": "Healthy",
+      "confidence_score": 0.97,
+      "action_required": "Excellent root establishment. Shading radius +1.2m.",
+      "audited_at": "2026-10-31T22:46:10.506Z",
+      "auditor_name": "Rotary Green Team"
+    },
+    {
+      "id": "SAP-VIZ-006",
+      "ward_id": "W42",
+      "species": "Pongamia pinnata (Pungam)",
+      "photo_url": "/uploads/sample_pungam_02.jpg",
+      "latitude": 17.7105,
+      "longitude": 83.3005,
+      "gps_accuracy": 4.5,
+      "survival_status": "Needs Tree Guard",
+      "confidence_score": 0.91,
+      "action_required": "Tree guard damaged by pedestrian traffic. Replace bamboo mesh.",
+      "audited_at": "2026-11-03T22:46:10.506Z",
+      "auditor_name": "NTPC CSR Inspector"
+    },
+    {
+      "id": "SAP-VIZ-007",
+      "ward_id": "W36",
+      "species": "Terminalia catappa (Badam)",
+      "photo_url": "/uploads/sample_badam_02.jpg",
+      "latitude": 17.7285,
+      "longitude": 83.2985,
+      "gps_accuracy": 3.9,
+      "survival_status": "Healthy",
+      "confidence_score": 0.95,
+      "action_required": "Good leaf moisture retention. Next check in 2 weeks.",
+      "audited_at": "2026-11-02T22:46:10.507Z",
+      "auditor_name": "Vizag Volunteers Core"
+    },
+    {
+      "id": "SAP-VIZ-008",
+      "ward_id": "W12",
+      "species": "Casuarina equisetifolia",
+      "photo_url": "/uploads/sample_casuarina_01.jpg",
+      "latitude": 17.7605,
+      "longitude": 83.2205,
+      "gps_accuracy": 4.1,
+      "survival_status": "Healthy",
+      "confidence_score": 0.93,
+      "action_required": "Windbreak foliage dense. Soil aerated successfully.",
+      "audited_at": "2026-10-30T22:46:10.507Z",
+      "auditor_name": "Gangavaram Coastal Care"
+    },
+    {
+      "id": "SAP-VIZ-009",
+      "ward_id": "W48",
+      "species": "Azadirachta indica (Neem)",
+      "photo_url": "/uploads/sample_neem_03.jpg",
+      "latitude": 17.7515,
+      "longitude": 83.2415,
+      "gps_accuracy": 3.7,
+      "survival_status": "Drought Stressed",
+      "confidence_score": 0.89,
+      "action_required": "Railway heat radiation causing leaf curl. Add organic mulch.",
+      "audited_at": "2026-11-04T22:46:10.507Z",
+      "auditor_name": "Vignan Student Eco Club"
+    },
+    {
+      "id": "SAP-VIZ-010",
+      "ward_id": "W04",
+      "species": "Ficus benghalensis (Banyan)",
+      "photo_url": "/uploads/sample_banyan_02.jpg",
+      "latitude": 17.8185,
+      "longitude": 83.3425,
+      "gps_accuracy": 3,
+      "survival_status": "Healthy",
+      "confidence_score": 0.99,
+      "action_required": "Peak healthy canopy development. Regular drip line functioning.",
+      "audited_at": "2026-11-04T22:46:10.507Z",
+      "auditor_name": "GITAM Tech Campus Corps"
     }
   ],
   "audit_history": [
@@ -186,9 +284,81 @@
       "id": "AUD-001",
       "sapling_id": "SAP-VIZ-001",
       "ward_id": "W65",
-      "status_before": "Newly Planted",
+      "status_before": "Field Inspection",
       "status_after": "Healthy",
-      "timestamp": "2026-11-05T22:15:51.327Z"
+      "timestamp": "2026-11-02T22:46:10.505Z"
+    },
+    {
+      "id": "AUD-002",
+      "sapling_id": "SAP-VIZ-002",
+      "ward_id": "W60",
+      "status_before": "Field Inspection",
+      "status_after": "Drought Stressed",
+      "timestamp": "2026-11-04T22:46:10.506Z"
+    },
+    {
+      "id": "AUD-003",
+      "sapling_id": "SAP-VIZ-003",
+      "ward_id": "W58",
+      "status_before": "Field Inspection",
+      "status_after": "Healthy",
+      "timestamp": "2026-11-03T22:46:10.506Z"
+    },
+    {
+      "id": "AUD-004",
+      "sapling_id": "SAP-VIZ-004",
+      "ward_id": "W28",
+      "status_before": "Field Inspection",
+      "status_after": "Healthy",
+      "timestamp": "2026-11-01T22:46:10.506Z"
+    },
+    {
+      "id": "AUD-005",
+      "sapling_id": "SAP-VIZ-005",
+      "ward_id": "W15",
+      "status_before": "Field Inspection",
+      "status_after": "Healthy",
+      "timestamp": "2026-10-31T22:46:10.506Z"
+    },
+    {
+      "id": "AUD-006",
+      "sapling_id": "SAP-VIZ-006",
+      "ward_id": "W42",
+      "status_before": "Field Inspection",
+      "status_after": "Needs Tree Guard",
+      "timestamp": "2026-11-03T22:46:10.506Z"
+    },
+    {
+      "id": "AUD-007",
+      "sapling_id": "SAP-VIZ-007",
+      "ward_id": "W36",
+      "status_before": "Field Inspection",
+      "status_after": "Healthy",
+      "timestamp": "2026-11-02T22:46:10.507Z"
+    },
+    {
+      "id": "AUD-008",
+      "sapling_id": "SAP-VIZ-008",
+      "ward_id": "W12",
+      "status_before": "Field Inspection",
+      "status_after": "Healthy",
+      "timestamp": "2026-10-30T22:46:10.507Z"
+    },
+    {
+      "id": "AUD-009",
+      "sapling_id": "SAP-VIZ-009",
+      "ward_id": "W48",
+      "status_before": "Field Inspection",
+      "status_after": "Drought Stressed",
+      "timestamp": "2026-11-04T22:46:10.507Z"
+    },
+    {
+      "id": "AUD-0010",
+      "sapling_id": "SAP-VIZ-010",
+      "ward_id": "W04",
+      "status_before": "Field Inspection",
+      "status_after": "Healthy",
+      "timestamp": "2026-11-04T22:46:10.507Z"
     }
   ]
 }

@@ -67,6 +67,14 @@ const TRANSLATIONS = {
     verificationRate7d: "7-Day Verification Rate",
     pipelineVal: "Corporate Sales Pipeline Value",
     downloadReportBtn: "Download Executive PDF Audit Report",
+    exportCsvBtn: "Export CSV Ledger",
+    viewSaplingsBtn: "Inspect Trees",
+    viewWardSaplings: "View Geotagged Saplings",
+    saplingInspectorTitle: "Ward Sapling Audit Ledger",
+    saplingInspectorSub: "Individual verified tree records stored in database",
+    noSaplingsFound: "No sapling records found for this ward yet.",
+    closeDrawer: "Close",
+    auditedBy: "Auditor",
     wardTableTitle: "Ward-by-Ward CSR Audit Ledger",
 
     // About Screen
@@ -142,6 +150,14 @@ const TRANSLATIONS = {
     verificationRate7d: "7-రోజుల ధృవీకరణ రేటు",
     pipelineVal: "కార్పొరేట్ సేల్స్ పైప్‌లైన్ విలువ",
     downloadReportBtn: "అధికారిక PDF ఆడిట్ నివేదిక డౌన్‌లోడ్ చేయండి",
+    exportCsvBtn: "CSV నివేదిక డౌన్‌లోడ్",
+    viewSaplingsBtn: "మొక్కలు చూడండి",
+    viewWardSaplings: "నమోదైన మొక్కల వివరాలు",
+    saplingInspectorTitle: "వార్డు మొక్కల ఆడిట్ రికార్డులు",
+    saplingInspectorSub: "డేటాబేస్‌లో నిల్వ చేయబడిన వ్యక్తిగత చెట్ల వివరాలు",
+    noSaplingsFound: "ఈ వార్డులో ఇంకా మొక్కల రికార్డులు లేవు.",
+    closeDrawer: "మూసివేయి",
+    auditedBy: "ఆడిటర్",
     wardTableTitle: "వార్డుల వారీగా CSR ఆడిట్ వివరాలు",
 
     // About Screen
@@ -199,8 +215,34 @@ export default function App() {
   // Report Modal
   const [showPdfModal, setShowPdfModal] = useState(false);
 
+  // Sapling Inspector Drawer State (Member 3 Feature)
+  const [inspectingWard, setInspectingWard] = useState(null);
+  const [wardSaplings, setWardSaplings] = useState([]);
+  const [isLoadingSaplings, setIsLoadingSaplings] = useState(false);
+  const [saplingFilterStatus, setSaplingFilterStatus] = useState('ALL');
+
   // Database Connection State (Member 3 API Integration)
   const [isBackendConnected, setIsBackendConnected] = useState(false);
+
+  const handleOpenWardSaplings = async (ward) => {
+    setInspectingWard(ward);
+    setIsLoadingSaplings(true);
+    setSaplingFilterStatus('ALL');
+    try {
+      const res = await fetch(`/api/saplings?ward=${ward.id}`);
+      if (res.ok) {
+        const json = await res.json();
+        setWardSaplings(json.data || json || []);
+      } else {
+        setWardSaplings([]);
+      }
+    } catch (e) {
+      console.warn('[CanopyPulse] Could not fetch saplings for ward:', e);
+      setWardSaplings([]);
+    } finally {
+      setIsLoadingSaplings(false);
+    }
+  };
 
   // Helper text lookup
   const t = TRANSLATIONS[lang];
@@ -710,17 +752,27 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Direct Action Button */}
-                <button
-                  onClick={() => {
-                    setLoggerWardId(selectedWard.id);
-                    setActiveTab('geotag');
-                  }}
-                  className="w-full bg-[#064E3B] hover:bg-emerald-900 text-white font-semibold text-sm py-3 px-4 rounded-xl shadow transition flex items-center justify-center space-x-2"
-                >
-                  <Camera className="w-4 h-4 text-emerald-400" />
-                  <span>{t.logAuditForWard}</span>
-                </button>
+                {/* Action Buttons */}
+                <div className="space-y-2">
+                  <button
+                    onClick={() => handleOpenWardSaplings(selectedWard)}
+                    className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs py-2.5 px-4 rounded-xl border border-slate-200 transition flex items-center justify-center space-x-2"
+                  >
+                    <Eye className="w-4 h-4 text-emerald-600" />
+                    <span>{t.viewWardSaplings} ({selectedWard.tagged})</span>
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      setLoggerWardId(selectedWard.id);
+                      setActiveTab('geotag');
+                    }}
+                    className="w-full bg-[#064E3B] hover:bg-emerald-900 text-white font-semibold text-sm py-2.5 px-4 rounded-xl shadow transition flex items-center justify-center space-x-2"
+                  >
+                    <Camera className="w-4 h-4 text-emerald-400" />
+                    <span>{t.logAuditForWard}</span>
+                  </button>
+                </div>
               </div>
 
             </div>
@@ -959,6 +1011,16 @@ export default function App() {
                   <span>{isBackendConnected ? t.dbLive : t.dbOffline}</span>
                 </div>
 
+                {/* Export CSV Ledger Button (Member 3 API) */}
+                <a
+                  href="/api/export/csv"
+                  download="CanopyPulse_Vizag_CSR_Audit_Ledger.csv"
+                  className="bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold px-3 py-2.5 rounded-xl shadow-sm transition flex items-center space-x-1.5 border border-slate-300"
+                >
+                  <FileText className="w-4 h-4 text-emerald-600" />
+                  <span>{t.exportCsvBtn}</span>
+                </a>
+
                 {/* Printable PDF Certificate Modal Trigger */}
                 <button
                   onClick={() => setShowPdfModal(true)}
@@ -1075,6 +1137,7 @@ export default function App() {
                       <th className="p-3 font-semibold">Tagged Trees</th>
                       <th className="p-3 font-semibold">Survival Rate</th>
                       <th className="p-3 font-semibold">CSR Sponsor</th>
+                      <th className="p-3 font-semibold text-right">Action</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-100">
@@ -1097,6 +1160,15 @@ export default function App() {
                         <td className="p-3 font-semibold text-slate-800">{w.tagged}</td>
                         <td className="p-3 font-bold text-emerald-600">{w.survival}%</td>
                         <td className="p-3 text-slate-600 font-medium">{w.sponsor}</td>
+                        <td className="p-3 text-right">
+                          <button
+                            onClick={() => handleOpenWardSaplings(w)}
+                            className="inline-flex items-center space-x-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-[11px] font-bold px-2.5 py-1 rounded-lg border border-emerald-200 transition active:scale-95"
+                          >
+                            <Eye className="w-3.5 h-3.5 text-emerald-600" />
+                            <span>{t.viewSaplingsBtn}</span>
+                          </button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -1317,6 +1389,165 @@ export default function App() {
                 className="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold py-2.5 px-4 rounded-xl transition text-xs"
               >
                 Close
+              </button>
+            </div>
+
+          </div>
+        </div>
+      )}
+
+      {/* --- WARD INDIVIDUAL SAPLINGS INSPECTOR DRAWER / MODAL (MEMBER 3 FEATURE) --- */}
+      {inspectingWard && (
+        <div className="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+          <div className="bg-white w-full max-w-3xl rounded-2xl shadow-2xl border border-slate-200 p-5 sm:p-6 relative space-y-4 animate-scale-up max-h-[90vh] flex flex-col">
+            
+            {/* Modal Header */}
+            <div className="flex items-start justify-between border-b border-slate-200 pb-3">
+              <div>
+                <div className="flex items-center space-x-2">
+                  <span className="bg-emerald-100 text-emerald-800 text-xs font-bold px-2 py-0.5 rounded">
+                    {inspectingWard.id}
+                  </span>
+                  <h2 className="text-lg sm:text-xl font-bold text-[#064E3B]">{inspectingWard.name}</h2>
+                </div>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  {t.saplingInspectorSub} • Sponsor: <strong className="text-slate-700">{inspectingWard.sponsor}</strong>
+                </p>
+              </div>
+
+              <button
+                onClick={() => setInspectingWard(null)}
+                className="text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-100 transition"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Quick Micro-Climate Stat Strip */}
+            <div className="grid grid-cols-3 gap-3 text-xs bg-slate-50 p-3 rounded-xl border border-slate-200">
+              <div>
+                <span className="text-slate-500 block text-[10px]">Total Tagged</span>
+                <span className="font-bold text-slate-800 text-sm">{inspectingWard.tagged} Saplings</span>
+              </div>
+              <div>
+                <span className="text-slate-500 block text-[10px]">Verified Survival</span>
+                <span className="font-bold text-emerald-600 text-sm">{inspectingWard.survival}% Alive</span>
+              </div>
+              <div>
+                <span className="text-slate-500 block text-[10px]">Thermal Heat (LST)</span>
+                <span className="font-bold text-rose-600 text-sm">{inspectingWard.lst}°C</span>
+              </div>
+            </div>
+
+            {/* Status Filter Buttons */}
+            <div className="flex items-center space-x-2 text-xs overflow-x-auto pb-1">
+              {['ALL', 'Healthy', 'Drought Stressed', 'Needs Tree Guard'].map((status) => (
+                <button
+                  key={status}
+                  onClick={() => setSaplingFilterStatus(status)}
+                  className={`px-3 py-1 rounded-lg font-semibold whitespace-nowrap transition text-[11px] ${
+                    saplingFilterStatus === status
+                      ? 'bg-emerald-800 text-white shadow-sm'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                >
+                  {status === 'ALL' ? 'All Trees' : status}
+                </button>
+              ))}
+            </div>
+
+            {/* Saplings List Area */}
+            <div className="flex-1 overflow-y-auto space-y-3 pr-1 min-h-[220px]">
+              {isLoadingSaplings ? (
+                <div className="flex flex-col items-center justify-center py-12 text-slate-400 space-y-2">
+                  <RefreshCw className="w-6 h-6 animate-spin text-emerald-600" />
+                  <span className="text-xs">Fetching live database records...</span>
+                </div>
+              ) : wardSaplings.filter(s => saplingFilterStatus === 'ALL' || s.survival_status === saplingFilterStatus).length === 0 ? (
+                <div className="text-center py-12 bg-slate-50 rounded-xl border border-dashed border-slate-200 space-y-3">
+                  <Leaf className="w-8 h-8 text-slate-300 mx-auto" />
+                  <p className="text-xs text-slate-500">{t.noSaplingsFound}</p>
+                  <button
+                    onClick={() => {
+                      setLoggerWardId(inspectingWard.id);
+                      setInspectingWard(null);
+                      setActiveTab('geotag');
+                    }}
+                    className="inline-flex items-center space-x-1.5 bg-[#064E3B] text-white text-xs font-bold px-3 py-2 rounded-lg shadow hover:bg-emerald-900 transition"
+                  >
+                    <Camera className="w-3.5 h-3.5" />
+                    <span>Log First Tree For This Ward</span>
+                  </button>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {wardSaplings
+                    .filter(s => saplingFilterStatus === 'ALL' || s.survival_status === saplingFilterStatus)
+                    .map((s) => (
+                      <div key={s.id} className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 hover:border-emerald-300 transition space-y-2 text-xs">
+                        <div className="flex items-start justify-between">
+                          <div>
+                            <span className="font-mono font-bold text-slate-800 text-[11px] block">{s.id}</span>
+                            <span className="font-bold text-[#064E3B] text-xs block">{s.species}</span>
+                          </div>
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                            s.survival_status === 'Healthy'
+                              ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+                              : s.survival_status === 'Drought Stressed'
+                              ? 'bg-amber-100 text-amber-800 border border-amber-200'
+                              : 'bg-rose-100 text-rose-800 border border-rose-200'
+                          }`}>
+                            {s.survival_status}
+                          </span>
+                        </div>
+
+                        {/* Coordinates and AI confidence */}
+                        <div className="flex items-center justify-between text-[11px] text-slate-600 bg-white p-2 rounded-lg border border-slate-100">
+                          <div className="flex items-center space-x-1 text-slate-500 truncate">
+                            <MapPin className="w-3 h-3 text-emerald-600 flex-shrink-0" />
+                            <span>{s.latitude ? s.latitude.toFixed(4) : '17.6868'}° N, {s.longitude ? s.longitude.toFixed(4) : '83.2185'}° E (±{s.gps_accuracy || 4}m)</span>
+                          </div>
+                          <span className="font-bold text-emerald-700 text-[10px] whitespace-nowrap ml-1">
+                            {Math.round((s.confidence_score || 0.95) * 100)}% AI
+                          </span>
+                        </div>
+
+                        {/* Action requirement */}
+                        <div className="text-[11px] text-slate-600">
+                          <span className="text-slate-400 block text-[10px]">Action Required:</span>
+                          <span className="font-medium text-slate-700">{s.action_required}</span>
+                        </div>
+
+                        {/* Footer auditor & date */}
+                        <div className="flex items-center justify-between pt-1 border-t border-slate-200 text-[10px] text-slate-400">
+                          <span>{t.auditedBy}: <strong className="text-slate-600">{s.auditor_name || 'Volunteer'}</strong></span>
+                          <span>{new Date(s.audited_at).toLocaleDateString()}</span>
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              )}
+            </div>
+
+            {/* Modal Bottom Controls */}
+            <div className="flex items-center justify-between pt-3 border-t border-slate-200 text-xs">
+              <button
+                onClick={() => {
+                  setLoggerWardId(inspectingWard.id);
+                  setInspectingWard(null);
+                  setActiveTab('geotag');
+                }}
+                className="bg-[#064E3B] hover:bg-emerald-900 text-white font-bold py-2 px-3.5 rounded-xl shadow transition flex items-center space-x-1.5"
+              >
+                <Camera className="w-3.5 h-3.5" />
+                <span>Geotag Another Sapling</span>
+              </button>
+
+              <button
+                onClick={() => setInspectingWard(null)}
+                className="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold py-2 px-4 rounded-xl transition"
+              >
+                {t.closeDrawer}
               </button>
             </div>
 

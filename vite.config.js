@@ -44,6 +44,14 @@ function canopyBackendPlugin() {
             return;
           }
 
+          if (req.method === 'GET' && pathname === '/api/export/csv') {
+            const csv = db.generateCsv();
+            res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+            res.setHeader('Content-Disposition', 'attachment; filename="CanopyPulse_Vizag_CSR_Audit_Ledger.csv"');
+            res.end(csv);
+            return;
+          }
+
           if (req.method === 'GET' && pathname === '/api/wards') {
             res.end(JSON.stringify(db.getWards()));
             return;

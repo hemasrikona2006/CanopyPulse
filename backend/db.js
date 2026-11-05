@@ -23,7 +23,7 @@ export const INITIAL_VIZAG_WARDS = [
   { id: 'W04', name: 'Ward 04 Madhurawada', lst: 33.8, canopy: 16.2, priority: 'Low Priority', tagged: 290, survival: 93, sponsor: 'GITAM Eco Club', lat: 17.8180, lng: 83.3420, description: 'IT Hill corridor with ongoing sapling plantation drives.' }
 ];
 
-// --- SAMPLE BENCHMARK SAPLING RECORDS ---
+// --- SAMPLE BENCHMARK SAPLING RECORDS (REPRESENTING ALL 10 WARDS) ---
 export const INITIAL_SAPLINGS = [
   {
     id: 'SAP-VIZ-001',
@@ -66,6 +66,104 @@ export const INITIAL_SAPLINGS = [
     action_required: 'Add 2L of water and clear surrounding weeds.',
     audited_at: new Date(Date.now() - 2 * 86400000).toISOString(),
     auditor_name: 'RINL Green Corps'
+  },
+  {
+    id: 'SAP-VIZ-004',
+    ward_id: 'W28',
+    species: 'Azadirachta indica (Neem)',
+    photo_url: '/uploads/sample_neem_02.jpg',
+    latitude: 17.7214,
+    longitude: 83.3152,
+    gps_accuracy: 3.5,
+    survival_status: 'Healthy',
+    confidence_score: 0.98,
+    action_required: 'Vigorous leaf growth observed. Tree guard stable.',
+    audited_at: new Date(Date.now() - 4 * 86400000).toISOString(),
+    auditor_name: 'Siripuram Eco Circle'
+  },
+  {
+    id: 'SAP-VIZ-005',
+    ward_id: 'W15',
+    species: 'Ficus benghalensis (Banyan)',
+    photo_url: '/uploads/sample_banyan_01.jpg',
+    latitude: 17.7425,
+    longitude: 83.3315,
+    gps_accuracy: 3.2,
+    survival_status: 'Healthy',
+    confidence_score: 0.97,
+    action_required: 'Excellent root establishment. Shading radius +1.2m.',
+    audited_at: new Date(Date.now() - 5 * 86400000).toISOString(),
+    auditor_name: 'Rotary Green Team'
+  },
+  {
+    id: 'SAP-VIZ-006',
+    ward_id: 'W42',
+    species: 'Pongamia pinnata (Pungam)',
+    photo_url: '/uploads/sample_pungam_02.jpg',
+    latitude: 17.7105,
+    longitude: 83.3005,
+    gps_accuracy: 4.5,
+    survival_status: 'Needs Tree Guard',
+    confidence_score: 0.91,
+    action_required: 'Tree guard damaged by pedestrian traffic. Replace bamboo mesh.',
+    audited_at: new Date(Date.now() - 2 * 86400000).toISOString(),
+    auditor_name: 'NTPC CSR Inspector'
+  },
+  {
+    id: 'SAP-VIZ-007',
+    ward_id: 'W36',
+    species: 'Terminalia catappa (Badam)',
+    photo_url: '/uploads/sample_badam_02.jpg',
+    latitude: 17.7285,
+    longitude: 83.2985,
+    gps_accuracy: 3.9,
+    survival_status: 'Healthy',
+    confidence_score: 0.95,
+    action_required: 'Good leaf moisture retention. Next check in 2 weeks.',
+    audited_at: new Date(Date.now() - 3 * 86400000).toISOString(),
+    auditor_name: 'Vizag Volunteers Core'
+  },
+  {
+    id: 'SAP-VIZ-008',
+    ward_id: 'W12',
+    species: 'Casuarina equisetifolia',
+    photo_url: '/uploads/sample_casuarina_01.jpg',
+    latitude: 17.7605,
+    longitude: 83.2205,
+    gps_accuracy: 4.1,
+    survival_status: 'Healthy',
+    confidence_score: 0.93,
+    action_required: 'Windbreak foliage dense. Soil aerated successfully.',
+    audited_at: new Date(Date.now() - 6 * 86400000).toISOString(),
+    auditor_name: 'Gangavaram Coastal Care'
+  },
+  {
+    id: 'SAP-VIZ-009',
+    ward_id: 'W48',
+    species: 'Azadirachta indica (Neem)',
+    photo_url: '/uploads/sample_neem_03.jpg',
+    latitude: 17.7515,
+    longitude: 83.2415,
+    gps_accuracy: 3.7,
+    survival_status: 'Drought Stressed',
+    confidence_score: 0.89,
+    action_required: 'Railway heat radiation causing leaf curl. Add organic mulch.',
+    audited_at: new Date(Date.now() - 1 * 86400000).toISOString(),
+    auditor_name: 'Vignan Student Eco Club'
+  },
+  {
+    id: 'SAP-VIZ-010',
+    ward_id: 'W04',
+    species: 'Ficus benghalensis (Banyan)',
+    photo_url: '/uploads/sample_banyan_02.jpg',
+    latitude: 17.8185,
+    longitude: 83.3425,
+    gps_accuracy: 3.0,
+    survival_status: 'Healthy',
+    confidence_score: 0.99,
+    action_required: 'Peak healthy canopy development. Regular drip line functioning.',
+    audited_at: new Date(Date.now() - 1 * 86400000).toISOString(),
+    auditor_name: 'GITAM Tech Campus Corps'
   }
 ];
 
@@ -73,7 +171,7 @@ class CanopyDatabase {
   constructor() {
     this.data = {
       meta: {
-        version: '1.0.0',
+        version: '1.1.0',
         platform: 'CanopyPulse Visakhapatnam CSR Platform',
         initializedAt: new Date().toISOString(),
         lastUpdatedAt: new Date().toISOString()
@@ -100,6 +198,10 @@ class CanopyDatabase {
       if (fs.existsSync(DB_FILE)) {
         const raw = fs.readFileSync(DB_FILE, 'utf-8');
         this.data = JSON.parse(raw);
+        // If loaded data has few saplings, merge with initial saplings
+        if (!this.data.saplings || this.data.saplings.length < INITIAL_SAPLINGS.length) {
+          this.seed();
+        }
       } else {
         this.seed();
       }
@@ -125,18 +227,16 @@ class CanopyDatabase {
   seed() {
     this.data.wards = JSON.parse(JSON.stringify(INITIAL_VIZAG_WARDS));
     this.data.saplings = JSON.parse(JSON.stringify(INITIAL_SAPLINGS));
-    this.data.audit_history = [
-      {
-        id: 'AUD-001',
-        sapling_id: 'SAP-VIZ-001',
-        ward_id: 'W65',
-        status_before: 'Newly Planted',
-        status_after: 'Healthy',
-        timestamp: new Date().toISOString()
-      }
-    ];
+    this.data.audit_history = INITIAL_SAPLINGS.map((s, idx) => ({
+      id: `AUD-00${idx + 1}`,
+      sapling_id: s.id,
+      ward_id: s.ward_id,
+      status_before: 'Field Inspection',
+      status_after: s.survival_status,
+      timestamp: s.audited_at
+    }));
     this.save();
-    console.log('[CanopyDatabase] Seeded with 10 Vizag wards & initial saplings.');
+    console.log('[CanopyDatabase] Seeded with 10 Vizag wards & 10 benchmark saplings.');
   }
 
   // --- WARDS / PLANTATION MANAGEMENT ---
@@ -275,6 +375,51 @@ class CanopyDatabase {
 
     this.save();
     return sapling;
+  }
+
+  // --- CSV COMPLIANCE EXPORT GENERATOR ---
+  generateCsv() {
+    const headers = [
+      'Record ID',
+      'Ward ID',
+      'Ward Name',
+      'Species',
+      'Latitude',
+      'Longitude',
+      'GPS Accuracy (m)',
+      'Survival Status',
+      'AI Confidence (%)',
+      'Action Required',
+      'CSR Sponsor',
+      'Audited Timestamp',
+      'Auditor Name'
+    ];
+
+    const wardMap = {};
+    for (const w of this.data.wards) {
+      wardMap[w.id] = w;
+    }
+
+    const rows = this.data.saplings.map(s => {
+      const ward = wardMap[s.ward_id] || {};
+      return [
+        s.id,
+        s.ward_id,
+        `"${(ward.name || '').replace(/"/g, '""')}"`,
+        `"${(s.species || '').replace(/"/g, '""')}"`,
+        s.latitude,
+        s.longitude,
+        s.gps_accuracy,
+        s.survival_status,
+        Math.round((s.confidence_score || 0.95) * 100) + '%',
+        `"${(s.action_required || '').replace(/"/g, '""')}"`,
+        `"${(ward.sponsor || '').replace(/"/g, '""')}"`,
+        s.audited_at,
+        `"${(s.auditor_name || '').replace(/"/g, '""')}"`
+      ].join(',');
+    });
+
+    return [headers.join(','), ...rows].join('\r\n');
   }
 
   // --- EXECUTIVE DASHBOARD METRICS ---

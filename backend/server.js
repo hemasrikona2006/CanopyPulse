@@ -115,6 +115,7 @@ const server = http.createServer((req, res) => {
       <li><span>Visakhapatnam 10 Wards GIS & Micro-Climate Data</span> <a class="endpoint" href="/api/wards" target="_blank">GET /api/wards</a></li>
       <li><span>Individual Sapling Audit Records & Geotags</span> <a class="endpoint" href="/api/saplings" target="_blank">GET /api/saplings</a></li>
       <li><span>Executive Corporate CSR Dashboard Metrics</span> <a class="endpoint" href="/api/dashboard/stats" target="_blank">GET /api/dashboard/stats</a></li>
+      <li><span>Official CSR Compliance CSV Export</span> <a class="endpoint" href="/api/export/csv" target="_blank">📥 GET /api/export/csv</a></li>
     </ul>
 
     <a class="btn" href="http://localhost:3000" target="_blank">🚀 Open CanopyPulse React Web Application</a>
@@ -149,6 +150,18 @@ const server = http.createServer((req, res) => {
       platform: 'Visakhapatnam CSR Forestry Audit',
       timestamp: new Date().toISOString()
     });
+    return;
+  }
+
+  // GET /api/export/csv -> Download Official CSR Compliance CSV Ledger
+  if (method === 'GET' && pathname === '/api/export/csv') {
+    const csv = db.generateCsv();
+    setCorsHeaders(res);
+    res.writeHead(200, {
+      'Content-Type': 'text/csv; charset=utf-8',
+      'Content-Disposition': 'attachment; filename="CanopyPulse_Vizag_CSR_Audit_Ledger.csv"'
+    });
+    res.end(csv);
     return;
   }
 
