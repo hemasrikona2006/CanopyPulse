@@ -1,0 +1,194 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "platform": "CanopyPulse Visakhapatnam CSR Platform",
+    "initializedAt": "2026-11-05T22:15:51.326Z",
+    "lastUpdatedAt": "2026-11-05T22:15:51.327Z"
+  },
+  "wards": [
+    {
+      "id": "W65",
+      "name": "Ward 65 Gajuwaka",
+      "lst": 38.4,
+      "canopy": 6.2,
+      "priority": "High Priority",
+      "tagged": 450,
+      "survival": 82,
+      "sponsor": "HPCL",
+      "lat": 17.6888,
+      "lng": 83.2012,
+      "description": "Dense industrial auto hub with high asphalt ratio."
+    },
+    {
+      "id": "W28",
+      "name": "Ward 28 Siripuram",
+      "lst": 33.1,
+      "canopy": 18.5,
+      "priority": "Low Priority",
+      "tagged": 120,
+      "survival": 91,
+      "sponsor": "Local NGO",
+      "lat": 17.721,
+      "lng": 83.315,
+      "description": "Commercial center with moderate shade trees."
+    },
+    {
+      "id": "W58",
+      "name": "Ward 58 Autonagar",
+      "lst": 39.2,
+      "canopy": 4.1,
+      "priority": "High Priority",
+      "tagged": 600,
+      "survival": 74,
+      "sponsor": "RINL Vizag Steel",
+      "lat": 17.6712,
+      "lng": 83.185,
+      "description": "Heavy industrial heavy vehicle corridor."
+    },
+    {
+      "id": "W15",
+      "name": "Ward 15 MVP Colony",
+      "lst": 32.5,
+      "canopy": 22,
+      "priority": "Low Priority",
+      "tagged": 200,
+      "survival": 88,
+      "sponsor": "Rotary Club",
+      "lat": 17.742,
+      "lng": 83.331,
+      "description": "Residential sector with high citizen canopy."
+    },
+    {
+      "id": "W42",
+      "name": "Ward 42 Jagadamba",
+      "lst": 37.8,
+      "canopy": 5,
+      "priority": "High Priority",
+      "tagged": 310,
+      "survival": 79,
+      "sponsor": "NTPC Simhadri",
+      "lat": 17.71,
+      "lng": 83.3,
+      "description": "High pedestrian market district with zero tree cover."
+    },
+    {
+      "id": "W60",
+      "name": "Ward 60 Mindi Industrial Zone",
+      "lst": 40.1,
+      "canopy": 3.2,
+      "priority": "Critical Priority",
+      "tagged": 800,
+      "survival": 71,
+      "sponsor": "HPCL",
+      "lat": 17.66,
+      "lng": 83.17,
+      "description": "Severe heat island near petroleum refinery boundary."
+    },
+    {
+      "id": "W36",
+      "name": "Ward 36 Akkayyapalem",
+      "lst": 35.6,
+      "canopy": 11.4,
+      "priority": "Medium Priority",
+      "tagged": 180,
+      "survival": 85,
+      "sponsor": "Vizag Volunteers",
+      "lat": 17.728,
+      "lng": 83.298,
+      "description": "Mixed residential-commercial transport route."
+    },
+    {
+      "id": "W12",
+      "name": "Ward 12 Pendurthi",
+      "lst": 34.2,
+      "canopy": 14.8,
+      "priority": "Medium Priority",
+      "tagged": 250,
+      "survival": 89,
+      "sponsor": "Gangavaram Port",
+      "lat": 17.76,
+      "lng": 83.22,
+      "description": "Suburban transition zone experiencing rapid paving."
+    },
+    {
+      "id": "W48",
+      "name": "Ward 48 Gopalapatnam",
+      "lst": 36.1,
+      "canopy": 9.3,
+      "priority": "High Priority",
+      "tagged": 340,
+      "survival": 78,
+      "sponsor": "Vignan Eco Club",
+      "lat": 17.751,
+      "lng": 83.241,
+      "description": "Railway junction belt with high thermal reflection."
+    },
+    {
+      "id": "W04",
+      "name": "Ward 04 Madhurawada",
+      "lst": 33.8,
+      "canopy": 16.2,
+      "priority": "Low Priority",
+      "tagged": 290,
+      "survival": 93,
+      "sponsor": "GITAM Eco Club",
+      "lat": 17.818,
+      "lng": 83.342,
+      "description": "IT Hill corridor with ongoing sapling plantation drives."
+    }
+  ],
+  "saplings": [
+    {
+      "id": "SAP-VIZ-001",
+      "ward_id": "W65",
+      "species": "Pongamia pinnata (Pungam)",
+      "photo_url": "/uploads/sample_pungam_01.jpg",
+      "latitude": 17.6888,
+      "longitude": 83.2012,
+      "gps_accuracy": 3.8,
+      "survival_status": "Healthy",
+      "confidence_score": 0.96,
+      "action_required": "Sapling growth on track. Next check in 30 days.",
+      "audited_at": "2026-11-02T22:15:51.319Z",
+      "auditor_name": "Vizag Volunteer 04"
+    },
+    {
+      "id": "SAP-VIZ-002",
+      "ward_id": "W60",
+      "species": "Azadirachta indica (Neem)",
+      "photo_url": "/uploads/sample_neem_01.jpg",
+      "latitude": 17.6605,
+      "longitude": 83.1712,
+      "gps_accuracy": 4.2,
+      "survival_status": "Drought Stressed",
+      "confidence_score": 0.92,
+      "action_required": "Immediate deep watering (5L) required. Re-tighten tree guard.",
+      "audited_at": "2026-11-04T22:15:51.325Z",
+      "auditor_name": "Field Auditor HPCL-CSR"
+    },
+    {
+      "id": "SAP-VIZ-003",
+      "ward_id": "W58",
+      "species": "Terminalia catappa (Badam)",
+      "photo_url": "/uploads/sample_badam_01.jpg",
+      "latitude": 17.6715,
+      "longitude": 83.1855,
+      "gps_accuracy": 4,
+      "survival_status": "Healthy",
+      "confidence_score": 0.94,
+      "action_required": "Add 2L of water and clear surrounding weeds.",
+      "audited_at": "2026-11-03T22:15:51.325Z",
+      "auditor_name": "RINL Green Corps"
+    }
+  ],
+  "audit_history": [
+    {
+      "id": "AUD-001",
+      "sapling_id": "SAP-VIZ-001",
+      "ward_id": "W65",
+      "status_before": "Newly Planted",
+      "status_after": "Healthy",
+      "timestamp": "2026-11-05T22:15:51.327Z"
+    }
+  ]
+}
